@@ -691,91 +691,114 @@
     /* ═══════════════════════════════════════════════════════
        TAB 3: ĐỘ NHẠY OB54 — SENSITIVITY TUNER
        ═══════════════════════════════════════════════════════ */
-    .sensitivity-panel {
+    /* ═══════════════════════════════════════════════════════
+       TAB 3: ĐỘ NHẠY OB54 — SENSITIVITY TUNER
+       ═══════════════════════════════════════════════════════ */
+    #tab-ob54 {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
     }
 
-    .sensitivity-header-card {
+    .cyber-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-radius: var(--radius-lg);
       padding: 16px;
-      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .sens-title {
-      font-size: 12px;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      color: var(--cyan);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      animation: neonPulse 3s ease-in-out infinite;
-      margin-bottom: 6px;
-    }
-
-    .sens-subtitle {
-      font-size: 10px;
-      color: var(--silver);
-    }
-
-    .calibrate-btn {
-      margin-top: 14px;
+    .cyber-input {
       width: 100%;
-      background: linear-gradient(90deg, rgba(0,242,254,0.1), rgba(79,172,254,0.1));
-      border: 1px solid rgba(0,242,254,0.25);
-      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      border-radius: var(--radius-md);
+      color: var(--white);
+      font-size: 13px;
+      font-family: var(--font-mono);
+      padding: 12px 16px;
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: inset 0 1px 4px rgba(0,0,0,0.8);
+      -webkit-appearance: none;
+    }
+
+    .cyber-input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan-glow), inset 0 1px 4px rgba(0,0,0,0.8);
+    }
+
+    #calibrate-btn {
+      width: 100%;
+      margin-top: 14px;
+      padding: 14px;
+      background: linear-gradient(90deg, rgba(0, 242, 254, 0.1), rgba(79, 172, 254, 0.1));
+      border: 1px solid rgba(0, 242, 254, 0.35);
+      border-radius: var(--radius-md);
       color: var(--cyan);
       font-size: 11px;
       font-weight: 700;
       font-family: var(--font-mono);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 12px 16px;
+      letter-spacing: 2px;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px rgba(0, 242, 254, 0.05);
     }
 
-    .calibrate-btn:active {
-      background: linear-gradient(90deg, rgba(0,242,254,0.2), rgba(79,172,254,0.2));
-      transform: scale(0.97);
-    }
-
-    .device-input-row {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .device-input {
-      flex: 1;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-sm);
-      color: var(--white);
-      font-size: 12px;
-      font-family: var(--font-mono);
-      padding: 10px 12px;
-      outline: none;
-      -webkit-appearance: none;
-    }
-
-    .device-input:focus {
+    #calibrate-btn:not(:disabled):hover {
+      background: linear-gradient(90deg, rgba(0, 242, 254, 0.2), rgba(79, 172, 254, 0.2));
       border-color: var(--cyan);
-      box-shadow: 0 0 10px var(--cyan-glow);
+      box-shadow: 0 0 16px var(--cyan-glow);
     }
 
-    .slider-card {
-      padding: 18px 16px;
+    #calibrate-btn:disabled {
+      background: rgba(255, 255, 255, 0.02) !important;
+      border-color: rgba(255, 255, 255, 0.05) !important;
+      color: var(--muted) !important;
+      cursor: not-allowed;
+      box-shadow: none !important;
     }
 
-    .slider-card-header {
+    #calibration-status {
+      margin-top: 12px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: #ff9800;
+      text-shadow: 0 0 8px rgba(255, 152, 0, 0.2);
+      letter-spacing: 0.5px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    #calibration-status.success {
+      color: #00ff7f;
+      text-shadow: 0 0 10px rgba(0, 255, 127, 0.4);
+    }
+
+    #calibration-status.analyzing {
+      color: var(--cyan);
+      text-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    .slider-wrapper {
+      padding: 16px 14px;
+      margin-bottom: 12px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+    }
+
+    .slider-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      align-items: center;
+      margin-bottom: 12px;
     }
 
-    .slider-label {
+    .slider-title {
       font-size: 12px;
       font-weight: 600;
       color: var(--white);
@@ -785,38 +808,50 @@
       font-size: 9.5px;
       color: var(--silver);
       margin-top: 2px;
+      display: block;
     }
 
-    .slider-value-display {
-      display: flex;
-      align-items: baseline;
-      gap: 2px;
-    }
-
-    .slider-val {
-      font-size: 22px;
+    .slider-value {
+      font-size: 18px;
       font-family: var(--font-mono);
       font-weight: 700;
       color: var(--cyan);
-      line-height: 1;
     }
 
-    .slider-max {
-      font-size: 11px;
-      font-family: var(--font-mono);
+    .slider-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .step-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: 6px;
       color: var(--silver);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
-    /* Custom slider */
-    .cyber-range-wrap {
-      position: relative;
-      margin-top: 4px;
+    .step-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.15);
     }
 
-    .cyber-range {
+    .step-btn:active {
+      transform: scale(0.92);
+    }
+
+    .range-input {
+      flex: 1;
       -webkit-appearance: none;
       appearance: none;
-      width: 100%;
       height: 4px;
       border-radius: 2px;
       background: var(--glass-border);
@@ -824,50 +859,46 @@
       cursor: pointer;
     }
 
-    .cyber-range::-webkit-slider-thumb {
+    .range-input::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: var(--cyan);
-      box-shadow: 0 0 12px var(--cyan-glow), 0 0 24px rgba(0,242,254,0.15);
+      box-shadow: 0 0 10px var(--cyan-glow);
+      border: 2px solid rgba(0,0,0,0.6);
       cursor: pointer;
-      border: 2px solid rgba(0,0,0,0.5);
-      transition: box-shadow 0.2s ease;
+      transition: transform 0.1s ease;
     }
 
-    .cyber-range:active::-webkit-slider-thumb {
-      box-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan-glow);
+    .range-input:active::-webkit-slider-thumb {
+      transform: scale(1.15);
+      box-shadow: 0 0 16px var(--cyan);
     }
 
-    .slider-track-fill {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      height: 4px;
-      border-radius: 2px;
-      background: linear-gradient(90deg, var(--cyan), var(--electric));
-      transform: translateY(-50%);
-      pointer-events: none;
-      transition: width 0.1s linear;
+    .fire-button-wrapper {
+      border-color: rgba(255, 0, 127, 0.2) !important;
     }
 
-    .calibration-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 12px;
+    .fire-neon-text {
+      color: #ff007f !important;
+      text-shadow: 0 0 8px rgba(255, 0, 127, 0.3);
     }
 
-    .calib-tag {
-      background: rgba(0,242,254,0.06);
-      border: 1px solid rgba(0,242,254,0.12);
-      border-radius: 6px;
-      color: var(--cyan);
-      font-size: 9px;
-      font-family: var(--font-mono);
-      padding: 4px 8px;
+    .fire-step-btn {
+      color: #ff007f !important;
+      border-color: rgba(255, 0, 127, 0.2) !important;
+    }
+
+    .fire-step-btn:hover {
+      background: rgba(255, 0, 127, 0.08) !important;
+      border-color: rgba(255, 0, 127, 0.4) !important;
+    }
+
+    .fire-range::-webkit-slider-thumb {
+      background: #ff007f !important;
+      box-shadow: 0 0 10px rgba(255, 0, 127, 0.4) !important;
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -1443,80 +1474,136 @@
 
     <!-- ─── TAB 3: ĐỘ NHẠY OB54 ──────────────────────────── -->
     <div class="tab-panel" id="panel-2" role="tabpanel">
-
-      <div class="sensitivity-panel">
-
-        <div class="sensitivity-header-card glass-panel">
-          <div class="sens-title">⚡ OB54 Sensitivity Tuner</div>
+      <div id="tab-ob54" class="tab-content">
+        <div class="cyber-card sensitivity-header-card glass-panel">
+          <div class="sens-title">⚡ OB54 SENSITIVITY TUNER</div>
           <div class="sens-subtitle">Hiệu chỉnh độ nhạy tối ưu theo thiết bị của bạn</div>
+          
           <div class="device-input-row">
-            <input type="text" class="device-input" id="device-id-input" placeholder="Nhập Device ID hoặc Model..." autocomplete="off" autocorrect="off" spellcheck="false" />
+            <input type="text" class="cyber-input" id="device-model" placeholder="Nhập tên thiết bị (Ví dụ: iPhone 14 Pro Max...)" oninput="checkDeviceInput()" autocomplete="off" autocorrect="off" spellcheck="false" />
           </div>
-          <button class="calibrate-btn" onclick="runCalibration()">⚡ Hiệu Chỉnh Tự Động</button>
-          <div class="calibration-tags" id="calibration-tags">
-            <span class="calib-tag">GYRO: OFF</span>
-            <span class="calib-tag">MODE: STANDARD</span>
-            <span class="calib-tag">LATENCY: LOW</span>
-          </div>
+          
+          <button id="calibrate-btn" disabled onclick="executeCalibration()">⚡ HIỆU CHỈNH TỰ ĐỘNG</button>
+          
+          <div id="calibration-status">⚠️ HỆ THỐNG KHÓA: CHỜ NHẬP DỮ LIỆU PHẦN CỨNG...</div>
         </div>
 
-        <!-- Slider: Nhìn xung quanh -->
-        <div class="slider-card glass-panel">
-          <div class="slider-card-header">
-            <div>
-              <div class="slider-label">Nhìn xung quanh</div>
-              <div class="slider-sub">General Look · Free Camera</div>
+        <!-- Khung chứa các thanh kéo, mặc định ẩn -->
+        <div id="sliders-container" style="display: none;">
+          
+          <!-- Slider 1: Nhìn xung quanh (General Look) -->
+          <div class="slider-wrapper glass-panel">
+            <div class="slider-header">
+              <div>
+                <span class="slider-title">Nhìn xung quanh</span>
+                <span class="slider-sub">General Look · Free Camera</span>
+              </div>
+              <span class="slider-value" id="val-1">--</span>
             </div>
-            <div class="slider-value-display">
-              <span class="slider-val" id="val-look">158</span>
-              <span class="slider-max">/200</span>
+            <div class="slider-controls">
+              <button class="step-btn" onclick="stepSlider(1, -1)">[-]</button>
+              <input type="range" class="range-input" id="range-1" min="0" max="200" value="0" oninput="updateSliderVal(1, 'val-1')">
+              <button class="step-btn" onclick="stepSlider(1, 1)">[+]</button>
             </div>
           </div>
-          <div class="cyber-range-wrap">
-            <div class="slider-track-fill" id="fill-look" style="width:79%"></div>
-            <input type="range" class="cyber-range" id="slider-look" min="0" max="200" value="158"
-              oninput="updateSlider('look', this.value)" onchange="onSliderChange()">
-          </div>
-        </div>
 
-        <!-- Slider: Ống ngắm hồng tâm -->
-        <div class="slider-card glass-panel">
-          <div class="slider-card-header">
-            <div>
-              <div class="slider-label">Ống ngắm hồng tâm</div>
-              <div class="slider-sub">Red Dot Sight · ADS Sensitivity</div>
+          <!-- Slider 2: Ống ngắm hồng tâm (Red Dot Sight) -->
+          <div class="slider-wrapper glass-panel">
+            <div class="slider-header">
+              <div>
+                <span class="slider-title">Ống ngắm hồng tâm</span>
+                <span class="slider-sub">Red Dot Sight · ADS Sensitivity</span>
+              </div>
+              <span class="slider-value" id="val-2">--</span>
             </div>
-            <div class="slider-value-display">
-              <span class="slider-val" id="val-reddot">147</span>
-              <span class="slider-max">/200</span>
+            <div class="slider-controls">
+              <button class="step-btn" onclick="stepSlider(2, -1)">[-]</button>
+              <input type="range" class="range-input" id="range-2" min="0" max="200" value="0" oninput="updateSliderVal(2, 'val-2')">
+              <button class="step-btn" onclick="stepSlider(2, 1)">[+]</button>
             </div>
           </div>
-          <div class="cyber-range-wrap">
-            <div class="slider-track-fill" id="fill-reddot" style="width:73.5%"></div>
-            <input type="range" class="cyber-range" id="slider-reddot" min="0" max="200" value="147"
-              oninput="updateSlider('reddot', this.value)" onchange="onSliderChange()">
-          </div>
-        </div>
 
-        <!-- Slider: Ống ngắm 2x -->
-        <div class="slider-card glass-panel">
-          <div class="slider-card-header">
-            <div>
-              <div class="slider-label">Ống ngắm 2x</div>
-              <div class="slider-sub">2x Scope · Zoom Sensitivity</div>
+          <!-- Slider 3: Ống ngắm 2x (2x Scope) -->
+          <div class="slider-wrapper glass-panel">
+            <div class="slider-header">
+              <div>
+                <span class="slider-title">Ống ngắm 2x</span>
+                <span class="slider-sub">2x Scope · Zoom Sensitivity</span>
+              </div>
+              <span class="slider-value" id="val-3">--</span>
             </div>
-            <div class="slider-value-display">
-              <span class="slider-val" id="val-scope2x">130</span>
-              <span class="slider-max">/200</span>
+            <div class="slider-controls">
+              <button class="step-btn" onclick="stepSlider(3, -1)">[-]</button>
+              <input type="range" class="range-input" id="range-3" min="0" max="200" value="0" oninput="updateSliderVal(3, 'val-3')">
+              <button class="step-btn" onclick="stepSlider(3, 1)">[+]</button>
             </div>
           </div>
-          <div class="cyber-range-wrap">
-            <div class="slider-track-fill" id="fill-scope2x" style="width:65%"></div>
-            <input type="range" class="cyber-range" id="slider-scope2x" min="0" max="200" value="130"
-              oninput="updateSlider('scope2x', this.value)" onchange="onSliderChange()">
-          </div>
-        </div>
 
+          <!-- Slider 4: Ống ngắm 4x (4x Scope) -->
+          <div class="slider-wrapper glass-panel">
+            <div class="slider-header">
+              <div>
+                <span class="slider-title">Ống ngắm 4x</span>
+                <span class="slider-sub">4x Scope · Zoom Sensitivity</span>
+              </div>
+              <span class="slider-value" id="val-4">--</span>
+            </div>
+            <div class="slider-controls">
+              <button class="step-btn" onclick="stepSlider(4, -1)">[-]</button>
+              <input type="range" class="range-input" id="range-4" min="0" max="200" value="0" oninput="updateSliderVal(4, 'val-4')">
+              <button class="step-btn" onclick="stepSlider(4, 1)">[+]</button>
+            </div>
+          </div>
+
+          <!-- Slider 5: Ống ngắm súng ngắm (Sniper Scope) -->
+          <div class="slider-wrapper glass-panel">
+            <div class="slider-header">
+              <div>
+                <span class="slider-title">Ống ngắm súng ngắm</span>
+                <span class="slider-sub">Sniper Scope · Precision Scope</span>
+              </div>
+              <span class="slider-value" id="val-5">--</span>
+            </div>
+            <div class="slider-controls">
+              <button class="step-btn" onclick="stepSlider(5, -1)">[-]</button>
+              <input type="range" class="range-input" id="range-5" min="0" max="200" value="0" oninput="updateSliderVal(5, 'val-5')">
+              <button class="step-btn" onclick="stepSlider(5, 1)">[+]</button>
+            </div>
+          </div>
+
+          <!-- Slider 6: Nút camera tự do (Free Look) -->
+          <div class="slider-wrapper glass-panel">
+            <div class="slider-header">
+              <div>
+                <span class="slider-title">Nút camera tự do</span>
+                <span class="slider-sub">Free Look · Camera Sensitivity</span>
+              </div>
+              <span class="slider-value" id="val-6">--</span>
+            </div>
+            <div class="slider-controls">
+              <button class="step-btn" onclick="stepSlider(6, -1)">[-]</button>
+              <input type="range" class="range-input" id="range-6" min="0" max="200" value="0" oninput="updateSliderVal(6, 'val-6')">
+              <button class="step-btn" onclick="stepSlider(6, 1)">[+]</button>
+            </div>
+          </div>
+
+          <!-- Slider 7: Kích thước Nút Bắn (Fire Button Size) -->
+          <div class="slider-wrapper glass-panel fire-button-wrapper">
+            <div class="slider-header">
+              <div>
+                <span class="slider-title fire-neon-text">Kích thước Nút Bắn</span>
+                <span class="slider-sub">Fire Button Size · Precision Control</span>
+              </div>
+              <span class="slider-value fire-neon-text" id="val-7">--</span>
+            </div>
+            <div class="slider-controls">
+              <button class="step-btn fire-step-btn" onclick="stepSlider(7, -1)">[-]</button>
+              <input type="range" class="range-input fire-range" id="range-7" min="10" max="100" value="10" oninput="updateSliderVal(7, 'val-7')">
+              <button class="step-btn fire-step-btn" onclick="stepSlider(7, 1)">[+]</button>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       <div class="designer-footer">
@@ -1723,89 +1810,108 @@
     }
 
     /* ═══════════════════════════════════════════════════════
-       SENSITIVITY SLIDERS
+       OB54 SENSITIVITY TUNER ENGINE
        ═══════════════════════════════════════════════════════ */
-    const SLIDERS = {
-      look:    { el: null, fill: null, val: null },
-      reddot:  { el: null, fill: null, val: null },
-      scope2x: { el: null, fill: null, val: null },
-    };
+    let calibInterval = null;
 
-    function initSliders() {
-      Object.keys(SLIDERS).forEach(key => {
-        SLIDERS[key].el   = document.getElementById(`slider-${key}`);
-        SLIDERS[key].fill = document.getElementById(`fill-${key}`);
-        SLIDERS[key].val  = document.getElementById(`val-${key}`);
-      });
+    function checkDeviceInput() {
+      const input = document.getElementById('device-model');
+      const btn = document.getElementById('calibrate-btn');
+      const val = input.value.trim();
+      btn.disabled = val.length < 2;
     }
 
-    function updateSlider(key, value) {
-      const s = SLIDERS[key];
-      const v = parseInt(value, 10);
-      if (s.val) s.val.textContent = v;
-      if (s.fill) s.fill.style.width = ((v / 200) * 100) + '%';
+    function executeCalibration() {
+      const btn = document.getElementById('calibrate-btn');
+      const status = document.getElementById('calibration-status');
+      const deviceModel = document.getElementById('device-model').value.trim();
+      const container = document.getElementById('sliders-container');
+
+      btn.disabled = true;
+      status.className = 'analyzing';
+
+      let progress = 0;
+      if (calibInterval) clearInterval(calibInterval);
+
+      haptic([30, 30]);
+
+      calibInterval = setInterval(() => {
+        progress += 20;
+        btn.textContent = `ANALYZING INTERFACE MATRIX... ${progress}%`;
+        status.innerHTML = `⏳ Thuật toán AI đang phân tích dữ liệu màn hình cho <strong>${deviceModel}</strong>...`;
+
+        haptic([10]);
+
+        if (progress >= 100) {
+          clearInterval(calibInterval);
+          calibInterval = null;
+
+          btn.textContent = '✓ HOÀN THÀNH CẤU HÌNH';
+          status.className = 'success';
+          status.innerHTML = `✅ ĐỒNG BỘ THÀNH CÔNG ĐỘ NHẠY KÉO TÂM CHO: <strong>${deviceModel}</strong>`;
+
+          // Cấu hình nhạy OB54 chuẩn xác
+          const config = {
+            1: 165,
+            2: 170,
+            3: 180,
+            4: 148,
+            5: 0,
+            6: 93,
+            7: 48
+          };
+
+          for (let i = 1; i <= 7; i++) {
+            const rangeInput = document.getElementById(`range-${i}`);
+            const displayVal = document.getElementById(`val-${i}`);
+            const targetVal = config[i];
+
+            if (rangeInput && displayVal) {
+              rangeInput.value = targetVal;
+              displayVal.textContent = i === 7 ? `${targetVal}%` : targetVal;
+            }
+          }
+
+          container.style.display = 'block';
+          haptic([50, 100, 50]);
+
+          if (typeof showToast === 'function') {
+            showToast('⚡ Đồng bộ cấu hình độ nhạy thành công!');
+          }
+        }
+      }, 300);
     }
 
-    function onSliderChange() {
+    function stepSlider(sliderId, direction) {
+      const rangeInput = document.getElementById(`range-${sliderId}`);
+      const displayVal = document.getElementById(`val-${sliderId}`);
+      if (!rangeInput || !displayVal) return;
+
+      let currentVal = parseInt(rangeInput.value, 10);
+      if (isNaN(currentVal)) {
+        currentVal = sliderId === 7 ? 10 : 0;
+      }
+
+      const min = parseInt(rangeInput.min, 10);
+      const max = parseInt(rangeInput.max, 10);
+
+      let newVal = currentVal + direction;
+      if (newVal < min) newVal = min;
+      if (newVal > max) newVal = max;
+
+      rangeInput.value = newVal;
+      displayVal.textContent = sliderId === 7 ? `${newVal}%` : newVal;
+
       haptic([10]);
-      showToast('Đã cập nhật cấu hình độ nhạy!');
     }
 
-    /* ═══════════════════════════════════════════════════════
-       CALIBRATION ENGINE
-       ═══════════════════════════════════════════════════════ */
-    function runCalibration() {
-      haptic([20, 50, 20]);
-      const deviceId = document.getElementById('device-id-input').value.trim() || 'DEFAULT';
+    function updateSliderVal(sliderId, valId) {
+      const rangeInput = document.getElementById(`range-${sliderId}`);
+      const displayVal = document.getElementById(valId);
+      if (!rangeInput || !displayVal) return;
 
-      let hash = 0;
-      for (let i = 0; i < deviceId.length; i++) {
-        hash = ((hash << 5) - hash) + deviceId.charCodeAt(i);
-        hash |= 0;
-      }
-
-      const base = Math.abs(hash);
-      const look    = 130 + (base % 40);
-      const reddot  = 120 + (base % 35);
-      const scope2x = 110 + (base % 30);
-
-      // Animate sliders
-      animateSliderTo('look', look);
-      animateSliderTo('reddot', reddot);
-      animateSliderTo('scope2x', scope2x);
-
-      // Update calibration tags
-      const tagsEl = document.getElementById('calibration-tags');
-      if (tagsEl) {
-        tagsEl.innerHTML = `
-          <span class="calib-tag">GYRO: OFF</span>
-          <span class="calib-tag">DEVICE: ${deviceId.substring(0,12).toUpperCase()}</span>
-          <span class="calib-tag">LATENCY: ULTRA-LOW</span>
-          <span class="calib-tag">HASH: ${(base % 9999).toString(16).toUpperCase()}</span>
-        `;
-      }
-
-      showToast('⚡ Hiệu chỉnh thành công theo thiết bị của bạn!');
-    }
-
-    function animateSliderTo(key, target) {
-      const s = SLIDERS[key];
-      if (!s.el) return;
-      const start = parseInt(s.el.value, 10);
-      const diff = target - start;
-      const duration = 600;
-      const startTime = performance.now();
-
-      function step(now) {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(start + diff * eased);
-        s.el.value = current;
-        updateSlider(key, current);
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
+      const v = parseInt(rangeInput.value, 10);
+      displayVal.textContent = sliderId === 7 ? `${v}%` : v;
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -1887,7 +1993,6 @@
        ═══════════════════════════════════════════════════════ */
     document.addEventListener('DOMContentLoaded', () => {
       buildDnsGrid();
-      initSliders();
       initTelemetry();
       switchTab(0);
     });
