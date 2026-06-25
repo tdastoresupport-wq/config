@@ -112,13 +112,13 @@
     }
 
     @keyframes toastSlideUp {
-      from { transform: translateX(-50%) translateY(120%); opacity: 0; }
+      from { transform: translateX(-50%) translateY(150px); opacity: 0; }
       to { transform: translateX(-50%) translateY(0); opacity: 1; }
     }
 
     @keyframes toastSlideDown {
       from { transform: translateX(-50%) translateY(0); opacity: 1; }
-      to { transform: translateX(-50%) translateY(120%); opacity: 0; }
+      to { transform: translateX(-50%) translateY(150px); opacity: 0; }
     }
 
     @keyframes tabFadeIn {
@@ -955,7 +955,7 @@
       position: fixed;
       bottom: calc(var(--safe-bottom) + 24px);
       left: 50%;
-      transform: translateX(-50%) translateY(120%);
+      transform: translateX(-50%) translateY(150px);
       z-index: 9999;
       background: rgba(0, 0, 0, 0.88);
       backdrop-filter: blur(20px) saturate(180%);
@@ -970,6 +970,7 @@
       white-space: nowrap;
       pointer-events: none;
       will-change: transform, opacity;
+      opacity: 0;
     }
 
     #app-toast.show {
