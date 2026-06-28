@@ -5,54 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Zev Boost" />
+  <meta name="apple-mobile-web-app-title" content="ZEV QUANTUM" />
   <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Zev Boost OB54 PRO — Gaming optimization dashboard for iOS. DNS accelerator, sensitivity tuner, and performance toggles." />
-  <title>Zev Boost [OB54 PRO]</title>
+  <meta name="description" content="ZEV BOOST QUANTUM — Hacker Future Mainframe. iOS Gaming Overclock Engine." />
+  <title>ZEV BOOST QUANTUM [v4.0]</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+    /* ═══════════════════════════════════════════════════════
+       GOOGLE FONTS — QUANTUM TYPOGRAPHY
+       ═══════════════════════════════════════════════════════ */
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@400;600;700&display=swap');
 
     /* ═══════════════════════════════════════════════════════
-       DESIGN TOKENS
+       DESIGN TOKENS — HACKER FUTURE MAINFRAME
        ═══════════════════════════════════════════════════════ */
     :root {
-      --bg: #000000;
-      --glass-bg: rgba(255, 255, 255, 0.025);
-      --glass-bg-strong: rgba(255, 255, 255, 0.05);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-blur: blur(20px) saturate(180%);
+      --bg:           #000000;
+      --bg-1:         #030b05;
+      --bg-2:         #040d08;
+      --panel:        rgba(0, 255, 102, 0.03);
+      --panel-border: rgba(0, 255, 102, 0.18);
 
-      --cyan: #00f2fe;
-      --cyan-dim: rgba(0, 242, 254, 0.15);
-      --cyan-glow: rgba(0, 242, 254, 0.3);
-      --magenta: #ff007f;
-      --magenta-dim: rgba(255, 0, 127, 0.15);
-      --magenta-glow: rgba(255, 0, 127, 0.3);
-      --electric: #4facfe;
-      --electric-glow: rgba(79, 172, 254, 0.25);
-      --green: #00e676;
-      --green-glow: rgba(0, 230, 118, 0.25);
+      --toxic:        #00ff66;
+      --toxic-dim:    rgba(0, 255, 102, 0.12);
+      --toxic-glow:   rgba(0, 255, 102, 0.35);
+      --cyan:         #00f0ff;
+      --cyan-dim:     rgba(0, 240, 255, 0.10);
+      --cyan-glow:    rgba(0, 240, 255, 0.30);
+      --pink:         #ff007f;
+      --pink-dim:     rgba(255, 0, 127, 0.12);
+      --pink-glow:    rgba(255, 0, 127, 0.30);
+      --amber:        #ffb300;
+      --red:          #ff3333;
 
-      --white: #ffffff;
-      --silver: #a1a1aa;
-      --muted: #52525b;
-      --dark: #09090b;
+      --white:        #e8ffe8;
+      --silver:       #7a9b7a;
+      --muted:        #3a5a3a;
+      --dark:         #0a150a;
 
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font-mono:    'Share Tech Mono', 'Courier New', monospace;
+      --font-hud:     'Orbitron', sans-serif;
+      --font-sans:    'Inter', -apple-system, sans-serif;
 
-      --safe-top: env(safe-area-inset-top, 44px);
-      --safe-bottom: env(safe-area-inset-bottom, 34px);
+      --safe-top:     env(safe-area-inset-top, 44px);
+      --safe-bottom:  env(safe-area-inset-bottom, 34px);
 
-      --header-h: 170px;
-      --radius-lg: 16px;
-      --radius-md: 12px;
-      --radius-sm: 8px;
+      --r-sharp:      3px;
+      --r-md:         6px;
     }
 
     /* ═══════════════════════════════════════════════════════
-       GLOBAL RESET — iOS SCROLL FIX
+       GLOBAL RESET — iOS OPTIMIZED
        ═══════════════════════════════════════════════════════ */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -60,12 +63,14 @@
       padding: 0;
       -webkit-tap-highlight-color: transparent;
       -webkit-touch-callout: none;
+      touch-action: manipulation;
     }
 
     html {
       width: 100%;
       min-height: 100%;
       overflow-x: hidden;
+      background: #000;
     }
 
     body {
@@ -74,116 +79,322 @@
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--white);
-      font-family: var(--font-sans);
+      font-family: var(--font-mono);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    body::before {
+    /* ═══════════════════════════════════════════════════════
+       SCANLINE CRT OVERLAY
+       ═══════════════════════════════════════════════════════ */
+    body::after {
       content: '';
       position: fixed;
       inset: 0;
-      background:
-        radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.05) 0%, transparent 45%),
-        radial-gradient(circle at 85% 85%, rgba(255, 0, 127, 0.05) 0%, transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.025) 0%, transparent 60%);
+      z-index: 9998;
       pointer-events: none;
-      z-index: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.06) 0px,
+        rgba(0, 0, 0, 0.06) 1px,
+        transparent 1px,
+        transparent 3px
+      );
     }
 
     /* ═══════════════════════════════════════════════════════
        KEYFRAME ANIMATIONS
        ═══════════════════════════════════════════════════════ */
-    @keyframes neonPulse {
-      0%, 100% { opacity: 1; text-shadow: 0 0 8px var(--cyan), 0 0 20px var(--cyan-glow); }
-      50% { opacity: 0.75; text-shadow: 0 0 4px var(--cyan); }
+    @keyframes glitchText {
+      0%   { text-shadow: 2px 0 var(--pink), -2px 0 var(--cyan); clip-path: inset(0 0 95% 0); }
+      5%   { clip-path: inset(30% 0 60% 0); transform: skewX(-5deg); }
+      10%  { text-shadow: -2px 0 var(--toxic), 2px 0 var(--pink); clip-path: inset(50% 0 30% 0); }
+      15%  { clip-path: inset(0 0 0 0); transform: skewX(0deg); text-shadow: none; }
+      100% { clip-path: inset(0 0 0 0); transform: skewX(0deg); text-shadow: none; }
     }
 
-    @keyframes signaturePulse {
-      0%, 100% { color: var(--cyan); text-shadow: 0 0 10px var(--cyan-glow), 0 0 24px var(--electric-glow); }
-      50% { color: var(--electric); text-shadow: 0 0 10px var(--electric-glow), 0 0 24px var(--magenta-glow); }
+    @keyframes glitchPulse {
+      0%, 90%, 100% { transform: translate(0); opacity: 1; }
+      91% { transform: translate(-3px, 1px) skewX(-2deg); opacity: 0.85; }
+      93% { transform: translate(3px, -1px) skewX(2deg); opacity: 0.9; }
+      95% { transform: translate(-2px, 0); opacity: 0.7; }
+      97% { transform: translate(2px, 1px); opacity: 1; }
     }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
+    @keyframes neonFlicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow: 0 0 8px var(--toxic), 0 0 20px var(--toxic-glow); opacity: 1; }
+      20%, 24%, 55% { text-shadow: none; opacity: 0.5; }
+    }
+
+    @keyframes scanDown {
+      from { transform: translateY(-100%); }
+      to   { transform: translateY(100vh); }
+    }
+
+    @keyframes bootLine {
+      from { opacity: 0; transform: translateX(-8px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes toastSlideUp {
-      from { transform: translateX(-50%) translateY(150px); opacity: 0; }
-      to { transform: translateX(-50%) translateY(0); opacity: 1; }
+      from { transform: translateX(-50%) translateY(120px); opacity: 0; }
+      to   { transform: translateX(-50%) translateY(0); opacity: 1; }
     }
 
     @keyframes toastSlideDown {
       from { transform: translateX(-50%) translateY(0); opacity: 1; }
-      to { transform: translateX(-50%) translateY(150px); opacity: 0; }
+      to   { transform: translateX(-50%) translateY(120px); opacity: 0; }
+    }
+
+    @keyframes coreRotate {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    @keyframes corePulse {
+      0%, 100% { box-shadow: 0 0 20px var(--toxic-glow), 0 0 50px rgba(0,255,102,0.1); }
+      50%       { box-shadow: 0 0 40px var(--toxic), 0 0 80px var(--toxic-glow); }
+    }
+
+    @keyframes logScroll {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes injectBlink {
+      0%, 100% { opacity: 1; color: var(--toxic); }
+      25%, 75%  { opacity: 0; }
+      50%       { opacity: 1; color: var(--cyan); }
     }
 
     @keyframes tabFadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes modalSlideUp {
-      from { opacity: 0; transform: translateY(40px) scale(0.97); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -200% center; }
-      100% { background-position: 200% center; }
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes ambientBlink {
-      0%, 100% { box-shadow: 0 0 6px var(--cyan), 0 0 14px var(--cyan-glow); }
-      50% { box-shadow: 0 0 2px var(--cyan); }
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
     }
 
     /* ═══════════════════════════════════════════════════════
-       GLASS PANEL DESIGN SYSTEM
+       APP CONTAINER — MAX 480px MOBILE
        ═══════════════════════════════════════════════════════ */
-    .glass-panel {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border-radius: var(--radius-lg);
+    #app-root {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      margin: 0 auto;
       position: relative;
+      background: var(--bg-1);
       overflow: hidden;
     }
 
-    .glass-panel::before {
-      content: '';
+    /* ═══════════════════════════════════════════════════════
+       TERMINAL LOCK SCREEN
+       ═══════════════════════════════════════════════════════ */
+    #terminal-lock-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    #matrix-canvas {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 60%);
-      pointer-events: none;
-      border-radius: inherit;
+      width: 100%;
+      height: 100%;
+      opacity: 0.55;
+    }
+
+    .lock-content {
+      position: relative;
+      z-index: 10;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .lock-logo {
+      font-family: var(--font-hud);
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--toxic);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      animation: glitchPulse 4s ease-in-out infinite, neonFlicker 8s ease-in-out infinite;
+      margin-bottom: 4px;
+    }
+
+    .lock-sub {
+      font-size: 9px;
+      font-family: var(--font-mono);
+      color: var(--silver);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .lock-panel {
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid var(--panel-border);
+      padding: 22px 18px;
+      position: relative;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    }
+
+    .lock-panel::before {
+      content: '[ MAINFRAME_AUTH v4.0 ]';
+      position: absolute;
+      top: -8px;
+      left: 12px;
+      font-size: 8px;
+      font-family: var(--font-mono);
+      color: var(--toxic);
+      background: #000;
+      padding: 0 6px;
+      letter-spacing: 1px;
+    }
+
+    .lock-panel::after {
+      content: '[ + ]';
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-size: 9px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    .lock-label {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--silver);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    #hacker-key-input {
+      width: 100%;
+      background: rgba(0, 255, 102, 0.04);
+      border: 1px solid var(--panel-border);
+      color: var(--toxic);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      letter-spacing: 2px;
+      padding: 12px 14px;
+      outline: none;
+      text-transform: uppercase;
+      caret-color: var(--toxic);
+      margin-bottom: 14px;
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+      -webkit-appearance: none;
+    }
+
+    #hacker-key-input:focus {
+      border-color: var(--toxic);
+      box-shadow: 0 0 12px var(--toxic-glow);
+    }
+
+    #hacker-key-input::placeholder {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #inject-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, rgba(0,255,102,0.1), rgba(0,240,255,0.05));
+      border: 1px solid var(--toxic);
+      color: var(--toxic);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      box-shadow: 0 0 10px rgba(0,255,102,0.1);
+    }
+
+    #inject-btn:active {
+      transform: scale(0.97);
+      box-shadow: 0 0 20px var(--toxic-glow);
+    }
+
+    #lock-status {
+      margin-top: 14px;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--silver);
+      letter-spacing: 1px;
+      text-align: center;
+      min-height: 18px;
+      transition: color 0.3s;
+    }
+
+    #lock-status.error  { color: var(--red); }
+    #lock-status.inject { color: var(--cyan); animation: injectBlink 0.25s steps(1) infinite; }
+    #lock-status.ok     { color: var(--toxic); }
+
+    .lock-keys-hint {
+      margin-top: 20px;
+      font-size: 9px;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.7;
     }
 
     /* ═══════════════════════════════════════════════════════
-       STICKY TOP HEADER
+       MAIN APP (hidden until auth)
+       ═══════════════════════════════════════════════════════ */
+    #main-app {
+      display: none;
+      flex-direction: column;
+      min-height: 100vh;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    #main-app.visible {
+      display: flex;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HEADER — STICKY HUD BAR
        ═══════════════════════════════════════════════════════ */
     #app-header {
       position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      background: rgba(0, 0, 0, 0.80);
-      border-bottom: 1px solid var(--glass-border);
+      z-index: 500;
+      background: rgba(0, 0, 0, 0.90);
+      border-bottom: 1px solid var(--panel-border);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
     }
 
-    /* Brand bar */
-    .brand-bar {
+    .header-brand {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: calc(var(--safe-top) + 10px) 20px 10px;
+      padding: calc(var(--safe-top) + 8px) 16px 8px;
     }
 
     .brand-left {
@@ -192,205 +403,221 @@
       gap: 10px;
     }
 
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--cyan), var(--electric));
+    .brand-icon-wrap {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--toxic);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 14px var(--cyan-glow);
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+      box-shadow: 0 0 10px var(--toxic-glow);
       flex-shrink: 0;
     }
 
-    .brand-icon svg {
-      width: 20px;
-      height: 20px;
-      stroke: #000;
-      stroke-width: 2;
+    .brand-icon-wrap svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--toxic);
       fill: none;
+      stroke-width: 2;
     }
 
-    .brand-wordmark {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-name {
-      font-size: 15px;
-      font-weight: 800;
+    .brand-title {
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--toxic);
       letter-spacing: 2px;
       text-transform: uppercase;
-      background: linear-gradient(90deg, var(--cyan), var(--electric));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      animation: glitchPulse 6s ease-in-out infinite;
     }
 
-    .brand-tagline {
-      font-size: 9px;
+    .brand-version {
+      font-size: 7.5px;
       font-family: var(--font-mono);
       color: var(--silver);
       letter-spacing: 1.5px;
-      text-transform: uppercase;
+      margin-top: 2px;
     }
 
-    .brand-badge {
-      background: linear-gradient(135deg, var(--magenta), #a855f7);
-      color: #fff;
+    #license-badge {
       font-size: 8px;
-      font-weight: 800;
       font-family: var(--font-mono);
       letter-spacing: 1px;
       padding: 4px 8px;
-      border-radius: 6px;
+      border: 1px solid var(--panel-border);
+      color: var(--silver);
+      clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
       text-transform: uppercase;
-      box-shadow: 0 0 12px var(--magenta-glow);
     }
+
+    #license-badge.day   { border-color: var(--amber); color: var(--amber); }
+    #license-badge.week  { border-color: var(--cyan);  color: var(--cyan);  }
+    #license-badge.month { border-color: var(--toxic); color: var(--toxic); box-shadow: 0 0 8px var(--toxic-glow); }
 
     /* Telemetry strip */
     .telemetry-strip {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      padding: 0 16px 10px;
+      gap: 5px;
+      padding: 0 14px 8px;
     }
 
-    .telemetry-cell {
-      background: rgba(255,255,255,0.015);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-sm);
-      padding: 8px 4px;
+    .tele-cell {
+      background: rgba(0, 255, 102, 0.025);
+      border: 1px solid rgba(0,255,102,0.08);
+      padding: 7px 4px;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
     }
 
-    .telemetry-value {
-      font-size: 10.5px;
+    .tele-val {
+      font-size: 10px;
       font-family: var(--font-mono);
-      font-weight: 700;
-      color: var(--cyan);
-      letter-spacing: -0.3px;
+      color: var(--toxic);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       width: 100%;
       text-align: center;
-      animation: neonPulse 2s ease-in-out infinite;
+      animation: neonFlicker 12s ease-in-out infinite;
     }
 
-    .telemetry-label {
-      font-size: 7px;
+    .tele-lbl {
+      font-size: 6.5px;
       font-family: var(--font-mono);
-      color: var(--silver);
+      color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      margin-top: 2px;
     }
 
-    /* Tabs navigation */
-    .tabs-bar {
-      padding: 0 16px 10px;
-    }
-
-    .tabs-track {
+    /* Tab navigation */
+    .tab-nav {
       display: flex;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-md);
-      padding: 3px;
-      position: relative;
+      background: rgba(0,0,0,0.4);
+      border-bottom: 1px solid var(--panel-border);
+      padding: 0 14px 6px;
     }
 
-    .tab-glider {
-      position: absolute;
-      top: 3px;
-      bottom: 3px;
-      left: 3px;
-      width: calc((100% - 6px) / 3);
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 9px;
-      z-index: 1;
-      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: transform;
-    }
-
-    .tab-btn {
+    .tab-nav-btn {
       flex: 1;
       background: transparent;
       border: none;
-      color: var(--silver);
-      font-size: 9.5px;
-      font-weight: 700;
-      font-family: var(--font-sans);
-      letter-spacing: 0.4px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
-      padding: 10px 4px;
+      padding: 8px 4px;
       cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      transition: color 0.3s ease;
-      position: relative;
-      z-index: 2;
-      -webkit-user-select: none;
-      user-select: none;
+      gap: 5px;
     }
 
-    .tab-btn.active {
-      color: var(--white);
-    }
-
-    .tab-btn.active svg {
-      stroke: var(--cyan);
-    }
-
-    .tab-btn svg {
-      width: 12px;
-      height: 12px;
+    .tab-nav-btn svg {
+      width: 11px;
+      height: 11px;
       stroke: currentColor;
-      stroke-width: 1.8px;
       fill: none;
+      stroke-width: 1.8;
       flex-shrink: 0;
     }
 
-    .tab-btn:active { opacity: 0.7; }
+    .tab-nav-btn.active {
+      color: var(--toxic);
+    }
+
+    .tab-nav-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      background: var(--toxic);
+      box-shadow: 0 0 8px var(--toxic);
+    }
 
     /* ═══════════════════════════════════════════════════════
-       SCROLLABLE CONTENT AREA
+       CONTENT AREA
        ═══════════════════════════════════════════════════════ */
     #app-content {
       position: relative;
       z-index: 1;
-      padding: 20px 16px calc(var(--safe-bottom) + 24px);
+      padding: 18px 14px calc(var(--safe-bottom) + 24px);
+      flex: 1;
     }
 
     .tab-panel {
       display: none;
       flex-direction: column;
-      gap: 20px;
-      animation: tabFadeIn 0.35s ease-out forwards;
+      gap: 16px;
+      animation: tabFadeIn 0.35s ease forwards;
     }
 
-    .tab-panel.active {
-      display: flex;
+    .tab-panel.active { display: flex; }
+
+    /* ═══════════════════════════════════════════════════════
+       HUD PANEL — SCI-FI ANGLED CORNERS
+       ═══════════════════════════════════════════════════════ */
+    .hud-panel {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      position: relative;
+      padding: 16px 14px;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
     }
 
-    /* Section title */
-    .section-title {
-      font-size: 10px;
+    .hud-panel::before {
+      content: attr(data-label);
+      position: absolute;
+      top: -7px;
+      left: 12px;
+      font-size: 7.5px;
       font-family: var(--font-mono);
-      color: var(--silver);
-      letter-spacing: 2px;
+      color: var(--toxic);
+      background: var(--bg-1);
+      padding: 0 6px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .hud-panel::after {
+      content: '[ + ]';
+      position: absolute;
+      bottom: 4px;
+      right: 7px;
+      font-size: 8px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    .hud-panel.cyan-panel {
+      border-color: rgba(0,240,255,0.2);
+    }
+
+    .hud-panel.cyan-panel::before { color: var(--cyan); }
+
+    .hud-panel.pink-panel {
+      border-color: rgba(255,0,127,0.2);
+    }
+
+    .hud-panel.pink-panel::before { color: var(--pink); }
+
+    .section-title {
+      font-size: 9px;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       margin-bottom: 10px;
     }
 
@@ -398,179 +625,335 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, var(--glass-border), transparent);
+      background: linear-gradient(90deg, var(--panel-border), transparent);
     }
 
     /* ═══════════════════════════════════════════════════════
-       OPTIMIZATION TOGGLE CARDS
+       TAB 1: OVERCLOCK CORE
        ═══════════════════════════════════════════════════════ */
-    .toggle-grid {
+    /* Nuclear Core Button */
+    .core-wrapper {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 0 10px;
+    }
+
+    .core-ring-outer {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 2px solid var(--toxic);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 0 20px var(--toxic-glow), inset 0 0 20px rgba(0,255,102,0.05);
+      transition: all 0.4s ease;
+    }
+
+    .core-ring-outer.active {
+      border-color: var(--toxic);
+      box-shadow: 0 0 40px var(--toxic), 0 0 80px var(--toxic-glow), inset 0 0 40px rgba(0,255,102,0.08);
+      animation: corePulse 1.5s ease-in-out infinite;
+    }
+
+    .core-ring-mid {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 1px dashed rgba(0,255,102,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+    }
+
+    .core-ring-outer.active .core-ring-mid {
+      animation: coreRotate 3s linear infinite;
+      border-color: rgba(0,255,102,0.6);
+    }
+
+    .core-btn {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(0,255,102,0.12), rgba(0,0,0,0.9));
+      border: 2px solid var(--toxic);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      gap: 2px;
+      box-shadow: 0 0 14px var(--toxic-glow);
+      transition: all 0.3s ease;
+    }
+
+    .core-btn:active { transform: scale(0.92); }
+
+    .core-btn-label {
+      font-family: var(--font-hud);
+      font-size: 7px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--toxic);
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .core-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--toxic);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .core-status-text {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    .core-status-text.active {
+      color: var(--toxic);
+      text-shadow: 0 0 8px var(--toxic-glow);
+      animation: neonFlicker 4s ease-in-out infinite;
+    }
+
+    /* Core stats strip */
+    .core-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .core-stat-cell {
+      text-align: center;
+      padding: 10px 4px;
+      border: 1px solid rgba(0,255,102,0.1);
+      background: rgba(0,255,102,0.02);
+    }
+
+    .core-stat-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--toxic);
+    }
+
+    .core-stat-val.dim { color: var(--muted); }
+    .core-stat-val.active-val { animation: neonFlicker 3s ease-in-out infinite; }
+
+    .core-stat-lbl {
+      font-size: 7.5px;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 3px;
+    }
+
+    /* Hacker Log Terminal */
+    #hacker-log {
+      background: #000;
+      border: 1px solid rgba(0,255,102,0.15);
+      min-height: 130px;
+      max-height: 180px;
+      overflow-y: auto;
+      padding: 10px 12px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--toxic);
+      scrollbar-width: none;
+    }
+
+    #hacker-log::-webkit-scrollbar { display: none; }
+
+    .log-line {
+      display: block;
+      animation: logScroll 0.2s ease forwards;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .log-line.cyan  { color: var(--cyan); }
+    .log-line.pink  { color: var(--pink); }
+    .log-line.amber { color: var(--amber); }
+    .log-line.muted { color: var(--muted); }
+    .log-line.error { color: var(--red); }
+
+    /* Download Profile Button */
+    .download-profile-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, rgba(0,240,255,0.08), rgba(0,255,102,0.04));
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      transition: all 0.25s ease;
+      box-shadow: 0 0 8px rgba(0,240,255,0.1);
+    }
+
+    .download-profile-btn:active {
+      background: rgba(0,240,255,0.15);
+      box-shadow: 0 0 20px var(--cyan-glow);
+      transform: scale(0.97);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       TAB 2: OPTIMIZE — TOGGLE CARDS
+       ═══════════════════════════════════════════════════════ */
+    .toggle-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .toggle-card {
-      padding: 14px 16px;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      padding: 12px 14px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
       transition: all 0.25s ease;
     }
 
-    .toggle-card:active {
-      transform: scale(0.98);
+    .toggle-card:active { transform: scale(0.98); }
+
+    .toggle-card.active-card {
+      border-color: var(--toxic);
+      box-shadow: 0 0 10px rgba(0,255,102,0.1);
     }
 
-    .toggle-icon-box {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
+    .t-icon {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--panel-border);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
     }
 
-    .toggle-icon-box svg {
-      width: 18px;
-      height: 18px;
-      stroke-width: 1.6px;
+    .t-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke-width: 1.6;
       fill: none;
     }
 
-    .toggle-icon-box.cyan-box {
-      background: var(--cyan-dim);
-      border: 1px solid rgba(0, 242, 254, 0.2);
-    }
-    .toggle-icon-box.cyan-box svg { stroke: var(--cyan); }
+    .t-icon.green { background: rgba(0,255,102,0.06); border-color: rgba(0,255,102,0.2); }
+    .t-icon.green svg { stroke: var(--toxic); }
+    .t-icon.cyan  { background: rgba(0,240,255,0.06); border-color: rgba(0,240,255,0.2); }
+    .t-icon.cyan  svg { stroke: var(--cyan); }
+    .t-icon.pink  { background: rgba(255,0,127,0.06); border-color: rgba(255,0,127,0.2); }
+    .t-icon.pink  svg { stroke: var(--pink); }
+    .t-icon.amber { background: rgba(255,179,0,0.06); border-color: rgba(255,179,0,0.2); }
+    .t-icon.amber svg { stroke: var(--amber); }
 
-    .toggle-icon-box.magenta-box {
-      background: var(--magenta-dim);
-      border: 1px solid rgba(255, 0, 127, 0.2);
-    }
-    .toggle-icon-box.magenta-box svg { stroke: var(--magenta); }
+    .t-info { flex: 1; min-width: 0; }
 
-    .toggle-icon-box.electric-box {
-      background: rgba(79,172,254,0.12);
-      border: 1px solid rgba(79,172,254,0.2);
-    }
-    .toggle-icon-box.electric-box svg { stroke: var(--electric); }
-
-    .toggle-icon-box.green-box {
-      background: rgba(0,230,118,0.1);
-      border: 1px solid rgba(0,230,118,0.2);
-    }
-    .toggle-icon-box.green-box svg { stroke: var(--green); }
-
-    .toggle-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .toggle-name {
-      font-size: 13px;
-      font-weight: 600;
+    .t-name {
+      font-size: 11.5px;
+      font-family: var(--font-mono);
       color: var(--white);
       margin-bottom: 2px;
     }
 
-    .toggle-desc {
-      font-size: 10.5px;
+    .t-desc {
+      font-size: 9px;
+      font-family: var(--font-mono);
       color: var(--silver);
       line-height: 1.4;
     }
 
-    /* Toggle switch */
-    .cyber-switch {
+    /* Cyber toggle switch */
+    .cyber-sw {
       position: relative;
-      width: 44px;
-      height: 26px;
+      width: 40px;
+      height: 22px;
       flex-shrink: 0;
     }
 
-    .cyber-switch input {
+    .cyber-sw input {
       opacity: 0;
       width: 0;
       height: 0;
       position: absolute;
     }
 
-    .cyber-slider {
+    .sw-track {
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid var(--glass-border);
-      border-radius: 13px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--panel-border);
+      clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 4px 100%, 0 calc(100% - 4px));
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
-    .cyber-slider::before {
+    .sw-track::before {
       content: '';
       position: absolute;
-      width: 18px;
-      height: 18px;
+      width: 14px;
+      height: 14px;
       left: 3px;
       top: 3px;
-      background: var(--silver);
-      border-radius: 50%;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      background: var(--muted);
+      transition: all 0.3s ease;
     }
 
-    .cyber-switch input:checked + .cyber-slider {
-      background: rgba(0, 242, 254, 0.2);
-      border-color: var(--cyan);
-      box-shadow: 0 0 12px var(--cyan-glow);
+    .cyber-sw input:checked + .sw-track {
+      background: rgba(0,255,102,0.15);
+      border-color: var(--toxic);
+      box-shadow: 0 0 10px var(--toxic-glow);
     }
 
-    .cyber-switch input:checked + .cyber-slider::before {
+    .cyber-sw input:checked + .sw-track::before {
       transform: translateX(18px);
-      background: var(--cyan);
-      box-shadow: 0 0 8px var(--cyan-glow);
+      background: var(--toxic);
+      box-shadow: 0 0 6px var(--toxic);
     }
 
-    /* Ambient blink indicator */
-    .ambient-dot {
-      display: none;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--cyan);
-      animation: ambientBlink 1.2s ease-in-out infinite;
-    }
-
-    .ambient-dot.visible {
-      display: block;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       DNS ACCELERATOR GRID
-       ═══════════════════════════════════════════════════════ */
+    /* DNS Grid */
     .dns-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 8px;
     }
 
     .dns-card {
-      padding: 14px 12px;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      padding: 12px 10px;
+      clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
+      transition: all 0.25s ease;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      border-radius: var(--radius-md);
-    }
-
-    .dns-card:active {
-      transform: scale(0.97);
+      gap: 7px;
     }
 
     .dns-card.active-dns {
-      border-color: var(--cyan) !important;
-      box-shadow: 0 0 14px var(--cyan-glow);
+      border-color: var(--toxic);
+      box-shadow: 0 0 10px rgba(0,255,102,0.15);
     }
 
     .dns-card-header {
@@ -581,69 +964,62 @@
     }
 
     .dns-name {
-      font-size: 10.5px;
-      font-weight: 700;
+      font-size: 9.5px;
+      font-family: var(--font-mono);
       color: var(--white);
-      line-height: 1.2;
-    }
-
-    .dns-sub {
-      font-size: 8.5px;
-      color: var(--silver);
-      margin-top: 2px;
+      font-weight: 700;
       line-height: 1.3;
     }
 
-    .dns-toggle-switch {
+    .dns-sub {
+      font-size: 7.5px;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .dns-mini-switch {
       position: relative;
-      width: 30px;
-      height: 17px;
+      width: 26px;
+      height: 14px;
       flex-shrink: 0;
     }
 
-    .dns-toggle-switch input {
+    .dns-mini-switch input {
       opacity: 0;
       width: 0;
       height: 0;
       position: absolute;
     }
 
-    .dns-toggle-track {
+    .dns-sw-track {
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--glass-border);
-      border-radius: 9px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--panel-border);
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
-    .dns-toggle-track::before {
+    .dns-sw-track::before {
       content: '';
       position: absolute;
-      width: 11px;
-      height: 11px;
+      width: 8px;
+      height: 8px;
       left: 2px;
       top: 2px;
-      background: var(--silver);
-      border-radius: 50%;
+      background: var(--muted);
       transition: all 0.3s ease;
     }
 
-    .dns-toggle-switch input:checked + .dns-toggle-track {
-      background: rgba(0,242,254,0.2);
-      border-color: var(--cyan);
+    .dns-mini-switch input:checked + .dns-sw-track {
+      background: rgba(0,255,102,0.12);
+      border-color: var(--toxic);
     }
 
-    .dns-toggle-switch input:checked + .dns-toggle-track::before {
-      transform: translateX(13px);
-      background: var(--cyan);
-    }
-
-    .dns-ips {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+    .dns-mini-switch input:checked + .dns-sw-track::before {
+      transform: translateX(12px);
+      background: var(--toxic);
     }
 
     .dns-ip-row {
@@ -653,364 +1029,409 @@
     }
 
     .dns-ip-text {
-      font-size: 9px;
+      font-size: 8px;
       font-family: var(--font-mono);
-      color: var(--cyan);
+      color: var(--toxic);
       flex: 1;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .copy-ip-btn {
-      background: rgba(0,242,254,0.08);
-      border: 1px solid rgba(0,242,254,0.15);
-      border-radius: 5px;
-      color: var(--cyan);
-      font-size: 7.5px;
+    .copy-btn {
+      background: rgba(0,255,102,0.06);
+      border: 1px solid rgba(0,255,102,0.15);
+      color: var(--toxic);
+      font-size: 6.5px;
       font-family: var(--font-mono);
-      font-weight: 700;
-      padding: 3px 6px;
+      padding: 2px 5px;
       cursor: pointer;
-      white-space: nowrap;
       transition: all 0.2s ease;
-      -webkit-user-select: none;
-      user-select: none;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
     }
 
-    .copy-ip-btn:active {
-      background: rgba(0,242,254,0.2);
+    .copy-btn:active {
+      background: rgba(0,255,102,0.2);
       transform: scale(0.93);
     }
 
     /* ═══════════════════════════════════════════════════════
-       TAB 2: HIỆU NĂNG FF — PERFORMANCE TOGGLES
+       TAB 3: OB54 SENSITIVITY TUNER
        ═══════════════════════════════════════════════════════ */
-    /* Uses same toggle-card system */
-
-    /* ═══════════════════════════════════════════════════════
-       TAB 3: ĐỘ NHẠY OB54 — SENSITIVITY TUNER
-       ═══════════════════════════════════════════════════════ */
-    /* ═══════════════════════════════════════════════════════
-       TAB 3: ĐỘ NHẠY OB54 — SENSITIVITY TUNER
-       ═══════════════════════════════════════════════════════ */
-    #tab-ob54 {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    .sens-header-panel {
+      text-align: center;
     }
 
-    .cyber-card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      position: relative;
-      overflow: hidden;
+    .sens-title-hud {
+      font-family: var(--font-hud);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--toxic);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      animation: neonFlicker 6s ease-in-out infinite;
+    }
+
+    .sens-subtitle {
+      font-size: 9px;
+      font-family: var(--font-mono);
+      color: var(--silver);
+    }
+
+    .device-input-row {
+      margin-top: 12px;
     }
 
     .cyber-input {
       width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(0, 242, 254, 0.25);
-      border-radius: var(--radius-md);
-      color: var(--white);
-      font-size: 13px;
+      background: rgba(0, 255, 102, 0.03);
+      border: 1px solid rgba(0,255,102,0.2);
+      color: var(--toxic);
       font-family: var(--font-mono);
-      padding: 12px 16px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      padding: 11px 13px;
       outline: none;
-      transition: all 0.3s ease;
-      box-shadow: inset 0 1px 4px rgba(0,0,0,0.8);
+      caret-color: var(--toxic);
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
       -webkit-appearance: none;
+      transition: all 0.3s ease;
     }
 
     .cyber-input:focus {
-      border-color: var(--cyan);
-      box-shadow: 0 0 12px var(--cyan-glow), inset 0 1px 4px rgba(0,0,0,0.8);
+      border-color: var(--toxic);
+      box-shadow: 0 0 10px var(--toxic-glow);
+    }
+
+    .cyber-input::placeholder {
+      color: var(--muted);
+      font-size: 11px;
     }
 
     #calibrate-btn {
       width: 100%;
-      margin-top: 14px;
-      padding: 14px;
-      background: linear-gradient(90deg, rgba(0, 242, 254, 0.1), rgba(79, 172, 254, 0.1));
-      border: 1px solid rgba(0, 242, 254, 0.35);
-      border-radius: var(--radius-md);
-      color: var(--cyan);
-      font-size: 11px;
-      font-weight: 700;
+      margin-top: 12px;
+      padding: 13px;
+      background: linear-gradient(135deg, rgba(0,255,102,0.08), rgba(0,240,255,0.04));
+      border: 1px solid rgba(0,255,102,0.3);
+      color: var(--toxic);
       font-family: var(--font-mono);
-      letter-spacing: 2px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
       cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
       transition: all 0.3s ease;
-      box-shadow: 0 0 8px rgba(0, 242, 254, 0.05);
     }
 
-    #calibrate-btn:not(:disabled):hover {
-      background: linear-gradient(90deg, rgba(0, 242, 254, 0.2), rgba(79, 172, 254, 0.2));
-      border-color: var(--cyan);
-      box-shadow: 0 0 16px var(--cyan-glow);
+    #calibrate-btn:not(:disabled):active {
+      background: rgba(0,255,102,0.15);
+      box-shadow: 0 0 16px var(--toxic-glow);
     }
 
     #calibrate-btn:disabled {
-      background: rgba(255, 255, 255, 0.02) !important;
-      border-color: rgba(255, 255, 255, 0.05) !important;
+      border-color: rgba(255,255,255,0.05) !important;
       color: var(--muted) !important;
       cursor: not-allowed;
-      box-shadow: none !important;
     }
 
     #calibration-status {
-      margin-top: 12px;
-      font-size: 11px;
+      margin-top: 10px;
+      font-size: 10px;
       font-family: var(--font-mono);
-      color: #ff9800;
-      text-shadow: 0 0 8px rgba(255, 152, 0, 0.2);
-      letter-spacing: 0.5px;
+      color: var(--amber);
+      letter-spacing: 0.8px;
       text-align: center;
       transition: all 0.3s ease;
+      min-height: 16px;
     }
 
-    #calibration-status.success {
-      color: #00ff7f;
-      text-shadow: 0 0 10px rgba(0, 255, 127, 0.4);
-    }
-
-    #calibration-status.analyzing {
-      color: var(--cyan);
-      text-shadow: 0 0 10px var(--cyan-glow);
-    }
-
-    #calibration-status.error {
-      color: #ff3333;
-      text-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
-    }
+    #calibration-status.error    { color: var(--red); }
+    #calibration-status.ok       { color: var(--toxic); }
+    #calibration-status.scanning { color: var(--cyan); }
 
     .slider-wrapper {
-      padding: 16px 14px;
-      margin-bottom: 12px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-md);
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      padding: 14px 12px;
+      margin-bottom: 8px;
+      clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
     }
 
-    .slider-header {
+    .slider-hd {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .slider-title {
-      font-size: 12px;
-      font-weight: 600;
+    .slider-name {
+      font-size: 11px;
+      font-family: var(--font-mono);
       color: var(--white);
+      font-weight: 600;
     }
 
-    .slider-sub {
-      font-size: 9.5px;
-      color: var(--silver);
+    .slider-subn {
+      font-size: 8px;
+      font-family: var(--font-mono);
+      color: var(--muted);
       margin-top: 2px;
       display: block;
     }
 
-    .slider-value {
+    .slider-val-display {
       font-size: 18px;
-      font-family: var(--font-mono);
+      font-family: var(--font-hud);
       font-weight: 700;
-      color: var(--cyan);
+      color: var(--toxic);
     }
 
     .slider-controls {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .step-btn {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--glass-border);
-      border-radius: 6px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--panel-border);
       color: var(--silver);
-      font-size: 12px;
       font-family: var(--font-mono);
-      padding: 6px 10px;
+      font-size: 11px;
+      padding: 5px 9px;
       cursor: pointer;
       transition: all 0.2s ease;
       user-select: none;
       -webkit-user-select: none;
     }
 
-    .step-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--white);
-      border-color: rgba(255, 255, 255, 0.15);
-    }
-
-    .step-btn:active {
-      transform: scale(0.92);
-    }
+    .step-btn:active { background: rgba(0,255,102,0.1); color: var(--toxic); transform: scale(0.9); }
 
     .range-input {
       flex: 1;
       -webkit-appearance: none;
       appearance: none;
-      height: 4px;
-      border-radius: 2px;
-      background: var(--glass-border);
+      height: 3px;
+      background: rgba(0,255,102,0.15);
       outline: none;
       cursor: pointer;
     }
 
     .range-input::-webkit-slider-thumb {
       -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 10px var(--cyan-glow);
-      border: 2px solid rgba(0,0,0,0.6);
+      width: 18px;
+      height: 18px;
+      background: var(--toxic);
+      box-shadow: 0 0 8px var(--toxic-glow);
+      border: 2px solid #000;
       cursor: pointer;
       transition: transform 0.1s ease;
     }
 
     .range-input:active::-webkit-slider-thumb {
-      transform: scale(1.15);
-      box-shadow: 0 0 16px var(--cyan);
+      transform: scale(1.2);
+      box-shadow: 0 0 14px var(--toxic);
     }
 
-    .fire-button-wrapper {
-      border-color: rgba(255, 0, 127, 0.2) !important;
-    }
+    /* Pink fire button overrides */
+    .fire-wrapper { border-color: rgba(255,0,127,0.2); }
+    .fire-name    { color: var(--pink) !important; }
+    .fire-val     { color: var(--pink) !important; }
+    .fire-step    { color: var(--pink) !important; border-color: rgba(255,0,127,0.2) !important; }
+    .fire-step:active { background: rgba(255,0,127,0.1) !important; }
+    .fire-range::-webkit-slider-thumb { background: var(--pink) !important; box-shadow: 0 0 8px var(--pink-glow) !important; }
 
-    .fire-neon-text {
-      color: #ff007f !important;
-      text-shadow: 0 0 8px rgba(255, 0, 127, 0.3);
-    }
-
-    .fire-step-btn {
-      color: #ff007f !important;
-      border-color: rgba(255, 0, 127, 0.2) !important;
-    }
-
-    .fire-step-btn:hover {
-      background: rgba(255, 0, 127, 0.08) !important;
-      border-color: rgba(255, 0, 127, 0.4) !important;
-    }
-
-    .fire-range::-webkit-slider-thumb {
-      background: #ff007f !important;
-      box-shadow: 0 0 10px rgba(255, 0, 127, 0.4) !important;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       CONFIG & SHARE GRID
-       ═══════════════════════════════════════════════════════ */
+    /* Share section */
     .share-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 8px;
     }
 
     .share-card {
-      padding: 16px 14px;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      padding: 14px 12px;
       cursor: pointer;
-      transition: all 0.25s ease;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       position: relative;
-      overflow: hidden;
+      transition: all 0.25s ease;
     }
 
-    .share-card:active {
-      transform: scale(0.96);
-    }
+    .share-card:active { transform: scale(0.96); }
 
-    .share-arrow {
+    .share-card-arrow {
       position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 16px;
-      height: 16px;
-      stroke: var(--silver);
-      stroke-width: 1.8px;
-      fill: none;
+      top: 10px;
+      right: 10px;
+      font-size: 9px;
+      color: var(--muted);
+      font-family: var(--font-mono);
     }
 
-    .share-icon-wrap {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
+    .share-icon-box {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--panel-border);
       display: flex;
       align-items: center;
       justify-content: center;
+      clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
     }
 
-    .share-icon-wrap svg {
-      width: 22px;
-      height: 22px;
-      stroke-width: 1.6px;
+    .share-icon-box svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 1.5;
       fill: none;
     }
 
-    .share-icon-wrap.cyan-share {
-      background: var(--cyan-dim);
-      border: 1px solid rgba(0,242,254,0.25);
-      box-shadow: 0 0 12px var(--cyan-glow);
-    }
-    .share-icon-wrap.cyan-share svg { stroke: var(--cyan); }
-
-    .share-icon-wrap.magenta-share {
-      background: var(--magenta-dim);
-      border: 1px solid rgba(255,0,127,0.25);
-      box-shadow: 0 0 12px var(--magenta-glow);
-    }
-    .share-icon-wrap.magenta-share svg { stroke: var(--magenta); }
+    .share-icon-box.green { background: rgba(0,255,102,0.06); border-color: rgba(0,255,102,0.25); box-shadow: 0 0 8px rgba(0,255,102,0.1); }
+    .share-icon-box.green svg { stroke: var(--toxic); }
+    .share-icon-box.pink  { background: rgba(255,0,127,0.06); border-color: rgba(255,0,127,0.25); box-shadow: 0 0 8px var(--pink-glow); }
+    .share-icon-box.pink  svg { stroke: var(--pink); }
 
     .share-card-title {
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 12px;
+      font-family: var(--font-mono);
       color: var(--white);
-      margin-bottom: 4px;
+      font-weight: 700;
     }
 
     .share-card-desc {
-      font-size: 10px;
-      color: var(--silver);
-      line-height: 1.45;
+      font-size: 9px;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      line-height: 1.5;
     }
+
+    /* ═══════════════════════════════════════════════════════
+       INSTALL MODAL
+       ═══════════════════════════════════════════════════════ */
+    #install-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 4000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    #install-modal-overlay.open { display: flex; }
+
+    .modal-box {
+      width: 100%;
+      max-width: 452px;
+      background: #050e05;
+      border: 1px solid var(--panel-border);
+      padding: 22px 18px calc(var(--safe-bottom) + 22px);
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+      animation: fadeInUp 0.35s ease forwards;
+    }
+
+    .modal-handle {
+      width: 32px;
+      height: 3px;
+      background: var(--panel-border);
+      margin: 0 auto 18px;
+    }
+
+    .modal-title {
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--toxic);
+      margin-bottom: 4px;
+    }
+
+    .modal-sub {
+      font-size: 9.5px;
+      font-family: var(--font-mono);
+      color: var(--silver);
+      margin-bottom: 18px;
+    }
+
+    .modal-step {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+
+    .modal-step-num {
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgba(0,255,102,0.3);
+      color: var(--toxic);
+      font-size: 9px;
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .modal-step-text {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--silver);
+      line-height: 1.55;
+    }
+
+    .modal-step-text strong { color: var(--white); }
+
+    .modal-close-btn {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--panel-border);
+      color: var(--silver);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+    }
+
+    .modal-close-btn:active { background: rgba(255,255,255,0.06); }
 
     /* ═══════════════════════════════════════════════════════
        TOAST NOTIFICATION
        ═══════════════════════════════════════════════════════ */
     #app-toast {
       position: fixed;
-      bottom: calc(var(--safe-bottom) + 24px);
+      bottom: calc(var(--safe-bottom) + 22px);
       left: 50%;
-      transform: translateX(-50%) translateY(150px);
-      z-index: 9999;
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(0,242,254,0.3);
-      border-radius: 30px;
-      padding: 12px 22px;
+      transform: translateX(-50%) translateY(120px);
+      z-index: 9990;
+      background: rgba(0,0,0,0.92);
+      border: 1px solid var(--toxic);
+      padding: 11px 20px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 0 24px var(--cyan-glow), 0 8px 32px rgba(0,0,0,0.6);
+      gap: 8px;
+      box-shadow: 0 0 20px var(--toxic-glow);
       white-space: nowrap;
       pointer-events: none;
-      will-change: transform, opacity;
       opacity: 0;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
     }
 
     #app-toast.show {
-      animation: toastSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: toastSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     #app-toast.hide {
@@ -1018,155 +1439,46 @@
     }
 
     .toast-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 8px var(--cyan);
+      width: 6px;
+      height: 6px;
+      background: var(--toxic);
+      box-shadow: 0 0 6px var(--toxic);
       flex-shrink: 0;
     }
 
     #app-toast-text {
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--white);
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       MODAL SHEET
-       ═══════════════════════════════════════════════════════ */
-    #install-modal-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 5000;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    #install-modal-overlay.open {
-      display: flex;
-    }
-
-    .modal-sheet {
-      width: 100%;
-      max-width: 480px;
-      background: #0d0d0d;
-      border: 1px solid rgba(0,242,254,0.2);
-      border-radius: 24px 24px 20px 20px;
-      padding: 24px 22px calc(var(--safe-bottom) + 24px);
-      animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .modal-handle {
-      width: 36px;
-      height: 4px;
-      border-radius: 2px;
-      background: rgba(255,255,255,0.12);
-      margin: 0 auto 20px;
-    }
-
-    .modal-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
-
-    .modal-subtitle {
-      font-size: 11.5px;
-      color: var(--silver);
-      margin-bottom: 20px;
-    }
-
-    .modal-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .modal-step-num {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--cyan-dim);
-      border: 1px solid rgba(0,242,254,0.25);
-      color: var(--cyan);
       font-size: 11px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .modal-step-text {
-      font-size: 12px;
-      color: var(--silver);
-      line-height: 1.5;
-    }
-
-    .modal-step-text strong {
-      color: var(--white);
-    }
-
-    .modal-link {
-      color: var(--cyan);
-      text-decoration: none;
       font-family: var(--font-mono);
-    }
-
-    .modal-close-btn {
-      width: 100%;
-      margin-top: 20px;
-      padding: 14px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-md);
-      color: var(--silver);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .modal-close-btn:active {
-      background: rgba(255,255,255,0.08);
+      color: var(--toxic);
+      letter-spacing: 0.5px;
     }
 
     /* ═══════════════════════════════════════════════════════
-       FOOTER / DESIGNER SIGNATURE
+       DESIGNER FOOTER
        ═══════════════════════════════════════════════════════ */
     .designer-footer {
-      margin-top: 28px;
-      padding-bottom: 8px;
+      margin-top: 24px;
       text-align: center;
     }
 
     .designer-line {
-      width: 40px;
+      width: 32px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-      margin: 0 auto 12px;
+      background: linear-gradient(90deg, transparent, var(--toxic), transparent);
+      margin: 0 auto 10px;
     }
 
     .designer-credit {
-      font-size: 10.5px;
+      font-size: 9.5px;
       font-family: var(--font-mono);
-      font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      animation: signaturePulse 4s ease-in-out infinite;
+      animation: neonFlicker 7s ease-in-out infinite;
+      color: var(--toxic);
     }
 
     .designer-version {
-      font-size: 8.5px;
+      font-size: 7.5px;
       font-family: var(--font-mono);
       color: var(--muted);
       letter-spacing: 1px;
@@ -1175,877 +1487,1065 @@
   </style>
 </head>
 <body>
+<div id="app-root">
 
   <!-- ═══════════════════════════════════════════════════════
-       STICKY TOP HEADER
+       TERMINAL LOCK SCREEN
        ═══════════════════════════════════════════════════════ -->
-  <header id="app-header">
-    <div class="brand-bar">
-      <div class="brand-left">
-        <div class="brand-icon">
-          <svg viewBox="0 0 24 24">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-          </svg>
-        </div>
-        <div class="brand-wordmark">
-          <div class="brand-name">ZEV BOOST</div>
-          <div class="brand-tagline">iOS Gaming Engine</div>
-        </div>
-      </div>
-      <div class="brand-badge">OB54 PRO</div>
-    </div>
+  <div id="terminal-lock-screen">
+    <canvas id="matrix-canvas"></canvas>
+    <div class="lock-content">
+      <div class="lock-logo">ZEV BOOST QUANTUM</div>
+      <div class="lock-sub">[ HACKER FUTURE MAINFRAME v4.0 ]</div>
 
-    <!-- Hardware Telemetry -->
-    <div class="telemetry-strip">
-      <div class="telemetry-cell">
-        <div class="telemetry-value" id="tele-gpu">A16 GPU</div>
-        <div class="telemetry-label">GPU ENGINE</div>
+      <div class="lock-panel">
+        <div class="lock-label">▶ NHẬP LICENSE KEY ĐỂ TRUY CẬP HỆ THỐNG</div>
+        <input
+          type="text"
+          id="hacker-key-input"
+          placeholder="ZEV-DAY-001 / ZEV-WEEK-001 / ZEV-MONTH-001"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          oninput="this.value = this.value.toUpperCase()"
+        />
+        <button id="inject-btn" onclick="injectLicense()">⚡ INJECT LICENSE &gt;&gt;</button>
+        <div id="lock-status">[ SYSTEM LOCKED — INSERT KEY TO BYPASS ]</div>
       </div>
-      <div class="telemetry-cell">
-        <div class="telemetry-value" id="tele-fps">60.0 FPS</div>
-        <div class="telemetry-label">RENDER RATE</div>
-      </div>
-      <div class="telemetry-cell">
-        <div class="telemetry-value" id="tele-ping">28ms</div>
-        <div class="telemetry-label">NET LATENCY</div>
-      </div>
-      <div class="telemetry-cell">
-        <div class="telemetry-value">16.8 GB</div>
-        <div class="telemetry-label">FREE STORAGE</div>
-      </div>
-    </div>
 
-    <!-- Tab Navigation -->
-    <div class="tabs-bar">
-      <div class="tabs-track" id="tabs-track" role="tablist">
-        <div class="tab-glider" id="tab-glider"></div>
-        <button class="tab-btn active" id="tab-btn-0" role="tab" aria-selected="true" onclick="switchTab(0)">
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-          </svg>
-          Tối Ưu iOS
-        </button>
-        <button class="tab-btn" id="tab-btn-1" role="tab" aria-selected="false" onclick="switchTab(1)">
-          <svg viewBox="0 0 24 24">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-          </svg>
-          Hiệu Năng FF
-        </button>
-        <button class="tab-btn" id="tab-btn-2" role="tab" aria-selected="false" onclick="switchTab(2)">
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-          Độ Nhạy OB54
-        </button>
+      <div class="lock-keys-hint">
+        SUPPORTED KEY FORMATS:<br>
+        ZEV-DAY-001...050 · ZEV-WEEK-001...050 · ZEV-MONTH-001...050
       </div>
     </div>
-  </header>
+  </div>
 
   <!-- ═══════════════════════════════════════════════════════
-       SCROLLABLE CONTENT
+       MAIN APPLICATION
        ═══════════════════════════════════════════════════════ -->
-  <main id="app-content">
+  <div id="main-app">
 
-    <!-- ─── TAB 1: TỐI ƯU IOS ─────────────────────────────── -->
-    <div class="tab-panel active" id="panel-0" role="tabpanel">
-
-      <!-- Core Optimization Toggles -->
-      <div>
-        <div class="section-title">Bộ Tối Ưu Hệ Thống</div>
-        <div class="toggle-grid">
-
-          <div class="toggle-card glass-panel" onclick="handleToggle(event, 'toggle-graphics')">
-            <div class="toggle-icon-box cyan-box">
-              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            </div>
-            <div class="toggle-info">
-              <div class="toggle-name">Graphics Override</div>
-              <div class="toggle-desc">Hạn chế độ phức tạp của màn hình chuyển động</div>
-            </div>
-            <label class="cyber-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="toggle-graphics" onchange="handleSwitchChange(this)">
-              <span class="cyber-slider"></span>
-            </label>
+    <!-- Header -->
+    <header id="app-header">
+      <div class="header-brand">
+        <div class="brand-left">
+          <div class="brand-icon-wrap">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
-
-          <div class="toggle-card glass-panel" onclick="handleToggle(event, 'toggle-daemon')">
-            <div class="toggle-icon-box magenta-box">
-              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <div class="toggle-info">
-              <div class="toggle-name">Daemon Freeze</div>
-              <div class="toggle-desc">Hạn chế tài nguyên làm mới nền ứng dụng</div>
-            </div>
-            <label class="cyber-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="toggle-daemon" onchange="handleSwitchChange(this)">
-              <span class="cyber-slider"></span>
-            </label>
+          <div>
+            <div class="brand-title">ZEV BOOST QUANTUM</div>
+            <div class="brand-version">HACKER FUTURE MAINFRAME v4.0</div>
           </div>
+        </div>
+        <div id="license-badge">NO_LICENSE</div>
+      </div>
 
-          <div class="toggle-card glass-panel" onclick="handleToggle(event, 'toggle-privacy')">
-            <div class="toggle-icon-box electric-box">
-              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            </div>
-            <div class="toggle-info">
-              <div class="toggle-name">Privacy Shield</div>
-              <div class="toggle-desc">Chặn theo dõi log phân tích dữ liệu</div>
-            </div>
-            <label class="cyber-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="toggle-privacy" onchange="handleSwitchChange(this)">
-              <span class="cyber-slider"></span>
-            </label>
-          </div>
-
-          <div class="toggle-card glass-panel" onclick="handleToggle(event, 'toggle-cache')">
-            <div class="toggle-icon-box green-box">
-              <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
-            </div>
-            <div class="toggle-info">
-              <div class="toggle-name">System Cache Purge</div>
-              <div class="toggle-desc">Xóa cache dư thừa hệ thống</div>
-            </div>
-            <label class="cyber-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="toggle-cache" onchange="handleSwitchChange(this)">
-              <span class="cyber-slider"></span>
-            </label>
-          </div>
-
-          <div class="toggle-card glass-panel" onclick="handleToggle(event, 'toggle-ram')">
-            <div class="toggle-icon-box cyan-box">
-              <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-            </div>
-            <div class="toggle-info">
-              <div class="toggle-name">Neural RAM Purge</div>
-              <div class="toggle-desc">Giải phóng bộ nhớ RAM tức thì</div>
-            </div>
-            <div class="ambient-dot" id="ram-dot"></div>
-            <label class="cyber-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="toggle-ram" onchange="handleSwitchChange(this); toggleRamDot(this)">
-              <span class="cyber-slider"></span>
-            </label>
-          </div>
-
+      <!-- Live Telemetry -->
+      <div class="telemetry-strip">
+        <div class="tele-cell">
+          <div class="tele-val" id="tele-gpu">A16_GPU</div>
+          <div class="tele-lbl">GPU CORE</div>
+        </div>
+        <div class="tele-cell">
+          <div class="tele-val" id="tele-fps">60.0</div>
+          <div class="tele-lbl">RENDER/S</div>
+        </div>
+        <div class="tele-cell">
+          <div class="tele-val" id="tele-ping">--ms</div>
+          <div class="tele-lbl">NET PING</div>
+        </div>
+        <div class="tele-cell">
+          <div class="tele-val">16.8GB</div>
+          <div class="tele-lbl">FREE_MEM</div>
         </div>
       </div>
 
-      <!-- DNS Accelerator -->
-      <div>
-        <div class="section-title">Elite DNS Network Accelerator</div>
-        <div class="dns-grid" id="dns-grid">
-          <!-- populated by JS -->
-        </div>
+      <!-- Tab nav -->
+      <div class="tab-nav">
+        <button class="tab-nav-btn active" id="tab-btn-0" onclick="switchTab(0)">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          OVERCLOCK
+        </button>
+        <button class="tab-nav-btn" id="tab-btn-1" onclick="switchTab(1)">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          OPTIMIZE
+        </button>
+        <button class="tab-nav-btn" id="tab-btn-2" onclick="switchTab(2)">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          OB54 SENS
+        </button>
       </div>
+    </header>
 
-      <!-- Config & Share -->
-      <div>
-        <div class="section-title">Cấu Hình & Chia Sẻ</div>
-        <div class="share-grid">
+    <!-- Content -->
+    <main id="app-content">
 
-          <div class="share-card glass-panel" id="btn-install" onclick="openInstallModal()">
-            <svg class="share-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-            <div class="share-icon-wrap cyan-share">
-              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <!-- ─── TAB 0: OVERCLOCK CORE ───────────────────────── -->
+      <div class="tab-panel active" id="panel-0">
+
+        <div class="hud-panel" data-label="CORE_STATUS">
+          <div class="section-title">OVERCLOCKING REACTOR CORE</div>
+          <div class="core-wrapper">
+            <div class="core-ring-outer" id="core-ring">
+              <div class="core-ring-mid">
+                <div class="core-btn" id="core-btn" onclick="toggleOverclock()">
+                  <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <div class="core-btn-label" id="core-btn-label">ACTIVATE</div>
+                </div>
+              </div>
             </div>
-            <div>
+            <div class="core-status-text" id="core-status-text">[ SYSTEM STANDBY — REACTOR OFFLINE ]</div>
+          </div>
+
+          <div class="core-stats">
+            <div class="core-stat-cell">
+              <div class="core-stat-val dim" id="stat-fps">—</div>
+              <div class="core-stat-lbl">RENDER BOOST</div>
+            </div>
+            <div class="core-stat-cell">
+              <div class="core-stat-val dim" id="stat-touch">—</div>
+              <div class="core-stat-lbl">TOUCH POLL</div>
+            </div>
+            <div class="core-stat-cell">
+              <div class="core-stat-val dim" id="stat-lock">—</div>
+              <div class="core-stat-lbl">WAKE LOCK</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hud-panel cyan-panel" data-label="EXPLOIT_LOG_STREAM">
+          <div class="section-title">HACKER LOG TERMINAL</div>
+          <div id="hacker-log">
+            <span class="log-line muted">[SYS] ZEV QUANTUM MAINFRAME v4.0 INITIALIZED</span>
+            <span class="log-line muted">[SYS] AWAITING OVERCLOCK COMMAND...</span>
+          </div>
+        </div>
+
+        <div class="hud-panel cyan-panel" data-label="NETWORK_CORE">
+          <div class="section-title">MOBILECONFIG PROFILE INJECTOR</div>
+          <button class="download-profile-btn" onclick="downloadMobileConfig()">
+            ⬇ TẢI PROFILE LÕI MẠNG GAME CRITICAL (.MOBILECONFIG)
+          </button>
+        </div>
+
+      </div><!-- end panel-0 -->
+
+      <!-- ─── TAB 1: OPTIMIZE ─────────────────────────────── -->
+      <div class="tab-panel" id="panel-1">
+
+        <div class="hud-panel" data-label="SYS_OPTIMIZATION_MATRIX">
+          <div class="section-title">HỆ THỐNG TỐI ƯU PHẦN CỨNG</div>
+          <div class="toggle-list">
+
+            <div class="toggle-card" onclick="handleToggle(event,'sw-graphics')">
+              <div class="t-icon green"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+              <div class="t-info">
+                <div class="t-name">Graphics Override</div>
+                <div class="t-desc">Hạn chế độ phức tạp màn hình chuyển động</div>
+              </div>
+              <label class="cyber-sw" onclick="event.stopPropagation()">
+                <input type="checkbox" id="sw-graphics" onchange="onToggleChange(this)">
+                <span class="sw-track"></span>
+              </label>
+            </div>
+
+            <div class="toggle-card" onclick="handleToggle(event,'sw-daemon')">
+              <div class="t-icon pink"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div class="t-info">
+                <div class="t-name">Daemon Freeze</div>
+                <div class="t-desc">Đóng băng tiến trình nền ứng dụng</div>
+              </div>
+              <label class="cyber-sw" onclick="event.stopPropagation()">
+                <input type="checkbox" id="sw-daemon" onchange="onToggleChange(this)">
+                <span class="sw-track"></span>
+              </label>
+            </div>
+
+            <div class="toggle-card" onclick="handleToggle(event,'sw-privacy')">
+              <div class="t-icon cyan"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+              <div class="t-info">
+                <div class="t-name">Privacy Shield</div>
+                <div class="t-desc">Chặn theo dõi log phân tích dữ liệu người dùng</div>
+              </div>
+              <label class="cyber-sw" onclick="event.stopPropagation()">
+                <input type="checkbox" id="sw-privacy" onchange="onToggleChange(this)">
+                <span class="sw-track"></span>
+              </label>
+            </div>
+
+            <div class="toggle-card" onclick="handleToggle(event,'sw-cache')">
+              <div class="t-icon amber"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg></div>
+              <div class="t-info">
+                <div class="t-name">System Cache Purge</div>
+                <div class="t-desc">Xóa cache dư thừa, giải phóng bộ nhớ</div>
+              </div>
+              <label class="cyber-sw" onclick="event.stopPropagation()">
+                <input type="checkbox" id="sw-cache" onchange="onToggleChange(this)">
+                <span class="sw-track"></span>
+              </label>
+            </div>
+
+            <div class="toggle-card" onclick="handleToggle(event,'sw-ram')">
+              <div class="t-icon green"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
+              <div class="t-info">
+                <div class="t-name">Neural RAM Purge</div>
+                <div class="t-desc">Giải phóng RAM tức thì, kích hoạt chỉ báo xung</div>
+              </div>
+              <label class="cyber-sw" onclick="event.stopPropagation()">
+                <input type="checkbox" id="sw-ram" onchange="onToggleChange(this)">
+                <span class="sw-track"></span>
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="hud-panel" data-label="ELITE_DNS_ACCELERATOR">
+          <div class="section-title">ELITE DNS NETWORK ACCELERATOR</div>
+          <div class="dns-grid" id="dns-grid"></div>
+        </div>
+
+        <div>
+          <div class="section-title">CẤU HÌNH & CHIA SẺ</div>
+          <div class="share-grid">
+            <div class="share-card" onclick="openInstallModal()">
+              <div class="share-card-arrow">↗</div>
+              <div class="share-icon-box green"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
               <div class="share-card-title">Cài Cấu Hình</div>
-              <div class="share-card-desc">Cài đặt Web Clip Zev Boost lên màn hình chính iOS.</div>
+              <div class="share-card-desc">Cài Web Clip Zev Boost lên màn hình chính iOS.</div>
             </div>
-          </div>
-
-          <div class="share-card glass-panel" id="btn-copy-link" onclick="copyShareLink()">
-            <svg class="share-arrow" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-            <div class="share-icon-wrap magenta-share">
-              <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            </div>
-            <div>
+            <div class="share-card" onclick="copyShareLink()">
+              <div class="share-card-arrow">↗</div>
+              <div class="share-icon-box pink"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
               <div class="share-card-title">Sao Chép Link</div>
-              <div class="share-card-desc">Sao chép live URL Cloudflare để chia sẻ cho thiết bị khác.</div>
+              <div class="share-card-desc">Copy URL Cloudflare để chia sẻ.</div>
             </div>
           </div>
-
         </div>
-      </div>
 
-      <!-- Footer -->
-      <div class="designer-footer">
-        <div class="designer-line"></div>
-        <div class="designer-credit">Web designed by Duc Anh Zev</div>
-        <div class="designer-version">v3.2.0 · OB54 PRO · ducanhzev.pages.dev</div>
-      </div>
-
-    </div><!-- end panel-0 -->
-
-    <!-- ─── TAB 2: HIỆU NĂNG FF ───────────────────────────── -->
-    <div class="tab-panel" id="panel-1" role="tabpanel">
-
-      <div>
-        <div class="section-title">Gaming Performance Matrix</div>
-        <div class="toggle-grid">
-
-          <div class="toggle-card glass-panel" onclick="handleToggle(event, 'ff-fps')">
-            <div class="toggle-icon-box cyan-box">
-              <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            </div>
-            <div class="toggle-info">
-              <div class="toggle-name">FPS Unlock Engine</div>
-              <div class="toggle-desc">Mở giới hạn FPS cho hiệu suất tối đa trong game</div>
-            </div>
-            <label class="cyber-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="ff-fps" onchange="handleSwitchChange(this)">
-              <span class="cyber-slider"></span>
-            </label>
-          </div>
-
-          <div class="toggle-card glass-panel" onclick="handleToggle(event, 'ff-render')">
-            <div class="toggle-icon-box magenta-box">
-              <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            </div>
-            <div class="toggle-info">
-              <div class="toggle-name">Render Quality Boost</div>
-              <div class="toggle-desc">Tăng cường chất lượng render đồ họa game</div>
-            </div>
-            <label class="cyber-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="ff-render" onchange="handleSwitchChange(this)">
-              <span class="cyber-slider"></span>
-            </label>
-          </div>
-
-          <div class="toggle-card glass-panel" onclick="handleToggle(event, 'ff-network')">
-            <div class="toggle-icon-box electric-box">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
-            </div>
-            <div class="toggle-info">
-              <div class="toggle-name">Network Prioritizer</div>
-              <div class="toggle-desc">Ưu tiên băng thông mạng cho Free Fire</div>
-            </div>
-            <label class="cyber-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="ff-network" onchange="handleSwitchChange(this)">
-              <span class="cyber-slider"></span>
-            </label>
-          </div>
-
-          <div class="toggle-card glass-panel" onclick="handleToggle(event, 'ff-thermal')">
-            <div class="toggle-icon-box green-box">
-              <svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
-            </div>
-            <div class="toggle-info">
-              <div class="toggle-name">Thermal Limiter</div>
-              <div class="toggle-desc">Quản lý nhiệt thiết bị giảm hiện tượng throttle</div>
-            </div>
-            <label class="cyber-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="ff-thermal" onchange="handleSwitchChange(this)">
-              <span class="cyber-slider"></span>
-            </label>
-          </div>
-
-          <div class="toggle-card glass-panel" onclick="handleToggle(event, 'ff-input')">
-            <div class="toggle-icon-box cyan-box">
-              <svg viewBox="0 0 24 24"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
-            </div>
-            <div class="toggle-info">
-              <div class="toggle-name">Input Lag Reducer</div>
-              <div class="toggle-desc">Giảm độ trễ đầu vào chạm màn hình</div>
-            </div>
-            <label class="cyber-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="ff-input" onchange="handleSwitchChange(this)">
-              <span class="cyber-slider"></span>
-            </label>
-          </div>
-
-          <div class="toggle-card glass-panel" onclick="handleToggle(event, 'ff-antilag')">
-            <div class="toggle-icon-box magenta-box">
-              <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </div>
-            <div class="toggle-info">
-              <div class="toggle-name">Anti-Lag System</div>
-              <div class="toggle-desc">Hệ thống chống giật lag trong trận đấu</div>
-            </div>
-            <label class="cyber-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="ff-antilag" onchange="handleSwitchChange(this)">
-              <span class="cyber-slider"></span>
-            </label>
-          </div>
-
+        <div class="designer-footer">
+          <div class="designer-line"></div>
+          <div class="designer-credit">Web designed by Duc Anh Zev</div>
+          <div class="designer-version">v4.0.0 · QUANTUM · ducanhzev.pages.dev</div>
         </div>
-      </div>
 
-      <div class="designer-footer">
-        <div class="designer-line"></div>
-        <div class="designer-credit">Web designed by Duc Anh Zev</div>
-        <div class="designer-version">v3.2.0 · OB54 PRO · ducanhzev.pages.dev</div>
-      </div>
+      </div><!-- end panel-1 -->
 
-    </div><!-- end panel-1 -->
+      <!-- ─── TAB 2: OB54 SENSITIVITY ─────────────────────── -->
+      <div class="tab-panel" id="panel-2">
 
-    <!-- ─── TAB 3: ĐỘ NHẠY OB54 ──────────────────────────── -->
-    <div class="tab-panel" id="panel-2" role="tabpanel">
-      <div id="tab-ob54" class="tab-content">
-        <div class="cyber-card sensitivity-header-card glass-panel">
-          <div class="sens-title">⚡ OB54 SENSITIVITY TUNER</div>
-          <div class="sens-subtitle">Hiệu chỉnh độ nhạy tối ưu theo thiết bị của bạn</div>
-          
+        <div class="hud-panel sens-header-panel" data-label="OB54_SENS_TUNER">
+          <div class="sens-title-hud">⚡ OB54 SENSITIVITY TUNER</div>
+          <div class="sens-subtitle">Nhập tên thiết bị để hiệu chỉnh độ nhạy theo phần cứng</div>
           <div class="device-input-row">
-            <input type="text" class="cyber-input" id="device-model" placeholder="Nhập tên thiết bị (Ví dụ: iPhone 14 Pro Max...)" oninput="checkDeviceInput()" autocomplete="off" autocorrect="off" spellcheck="false" />
+            <input
+              type="text"
+              class="cyber-input"
+              id="device-model"
+              placeholder="Ví dụ: iPhone 14 Pro Max..."
+              oninput="checkDeviceInput()"
+              autocomplete="off"
+              autocorrect="off"
+              spellcheck="false"
+            />
           </div>
-          
           <button id="calibrate-btn" disabled onclick="executeCalibration()">⚡ HIỆU CHỈNH TỰ ĐỘNG</button>
-          
           <div id="calibration-status">⚠️ HỆ THỐNG KHÓA: CHỜ NHẬP DỮ LIỆU PHẦN CỨNG...</div>
         </div>
 
-        <!-- Khung chứa các thanh kéo, mặc định ẩn -->
-        <div id="sliders-container" style="display: none;">
-          
-          <!-- Slider 1: Nhìn xung quanh (General Look) -->
-          <div class="slider-wrapper glass-panel">
-            <div class="slider-header">
+        <!-- Sliders container — hidden until calibration -->
+        <div id="sliders-container" style="display:none;">
+
+          <div class="slider-wrapper">
+            <div class="slider-hd">
               <div>
-                <span class="slider-title">Nhìn xung quanh</span>
-                <span class="slider-sub">General Look · Free Camera</span>
+                <span class="slider-name">Nhìn xung quanh</span>
+                <span class="slider-subn">General Look · Free Camera</span>
               </div>
-              <span class="slider-value" id="val-1">--</span>
+              <span class="slider-val-display" id="val-1">--</span>
             </div>
             <div class="slider-controls">
-              <button class="step-btn" onclick="stepSlider(1, -1)">[-]</button>
-              <input type="range" class="range-input" id="range-1" min="0" max="200" value="0" oninput="updateSliderVal(1, 'val-1')">
-              <button class="step-btn" onclick="stepSlider(1, 1)">[+]</button>
+              <button class="step-btn" onclick="stepSlider(1,-1)">[-]</button>
+              <input type="range" class="range-input" id="range-1" min="0" max="200" value="0" oninput="updateSliderVal(1,'val-1')">
+              <button class="step-btn" onclick="stepSlider(1,1)">[+]</button>
             </div>
           </div>
 
-          <!-- Slider 2: Ống ngắm hồng tâm (Red Dot Sight) -->
-          <div class="slider-wrapper glass-panel">
-            <div class="slider-header">
+          <div class="slider-wrapper">
+            <div class="slider-hd">
               <div>
-                <span class="slider-title">Ống ngắm hồng tâm</span>
-                <span class="slider-sub">Red Dot Sight · ADS Sensitivity</span>
+                <span class="slider-name">Ống ngắm hồng tâm</span>
+                <span class="slider-subn">Red Dot Sight · ADS Sensitivity</span>
               </div>
-              <span class="slider-value" id="val-2">--</span>
+              <span class="slider-val-display" id="val-2">--</span>
             </div>
             <div class="slider-controls">
-              <button class="step-btn" onclick="stepSlider(2, -1)">[-]</button>
-              <input type="range" class="range-input" id="range-2" min="0" max="200" value="0" oninput="updateSliderVal(2, 'val-2')">
-              <button class="step-btn" onclick="stepSlider(2, 1)">[+]</button>
+              <button class="step-btn" onclick="stepSlider(2,-1)">[-]</button>
+              <input type="range" class="range-input" id="range-2" min="0" max="200" value="0" oninput="updateSliderVal(2,'val-2')">
+              <button class="step-btn" onclick="stepSlider(2,1)">[+]</button>
             </div>
           </div>
 
-          <!-- Slider 3: Ống ngắm 2x (2x Scope) -->
-          <div class="slider-wrapper glass-panel">
-            <div class="slider-header">
+          <div class="slider-wrapper">
+            <div class="slider-hd">
               <div>
-                <span class="slider-title">Ống ngắm 2x</span>
-                <span class="slider-sub">2x Scope · Zoom Sensitivity</span>
+                <span class="slider-name">Ống ngắm 2x</span>
+                <span class="slider-subn">2x Scope · Zoom Sensitivity</span>
               </div>
-              <span class="slider-value" id="val-3">--</span>
+              <span class="slider-val-display" id="val-3">--</span>
             </div>
             <div class="slider-controls">
-              <button class="step-btn" onclick="stepSlider(3, -1)">[-]</button>
-              <input type="range" class="range-input" id="range-3" min="0" max="200" value="0" oninput="updateSliderVal(3, 'val-3')">
-              <button class="step-btn" onclick="stepSlider(3, 1)">[+]</button>
+              <button class="step-btn" onclick="stepSlider(3,-1)">[-]</button>
+              <input type="range" class="range-input" id="range-3" min="0" max="200" value="0" oninput="updateSliderVal(3,'val-3')">
+              <button class="step-btn" onclick="stepSlider(3,1)">[+]</button>
             </div>
           </div>
 
-          <!-- Slider 4: Ống ngắm 4x (4x Scope) -->
-          <div class="slider-wrapper glass-panel">
-            <div class="slider-header">
+          <div class="slider-wrapper">
+            <div class="slider-hd">
               <div>
-                <span class="slider-title">Ống ngắm 4x</span>
-                <span class="slider-sub">4x Scope · Zoom Sensitivity</span>
+                <span class="slider-name">Ống ngắm 4x</span>
+                <span class="slider-subn">4x Scope · Long Range Sensitivity</span>
               </div>
-              <span class="slider-value" id="val-4">--</span>
+              <span class="slider-val-display" id="val-4">--</span>
             </div>
             <div class="slider-controls">
-              <button class="step-btn" onclick="stepSlider(4, -1)">[-]</button>
-              <input type="range" class="range-input" id="range-4" min="0" max="200" value="0" oninput="updateSliderVal(4, 'val-4')">
-              <button class="step-btn" onclick="stepSlider(4, 1)">[+]</button>
+              <button class="step-btn" onclick="stepSlider(4,-1)">[-]</button>
+              <input type="range" class="range-input" id="range-4" min="0" max="200" value="0" oninput="updateSliderVal(4,'val-4')">
+              <button class="step-btn" onclick="stepSlider(4,1)">[+]</button>
             </div>
           </div>
 
-          <!-- Slider 5: Ống ngắm súng ngắm (Sniper Scope) -->
-          <div class="slider-wrapper glass-panel">
-            <div class="slider-header">
+          <div class="slider-wrapper">
+            <div class="slider-hd">
               <div>
-                <span class="slider-title">Ống ngắm súng ngắm</span>
-                <span class="slider-sub">Sniper Scope · Precision Scope</span>
+                <span class="slider-name">Ống ngắm súng ngắm</span>
+                <span class="slider-subn">Sniper Scope · Precision Targeting</span>
               </div>
-              <span class="slider-value" id="val-5">--</span>
+              <span class="slider-val-display" id="val-5">--</span>
             </div>
             <div class="slider-controls">
-              <button class="step-btn" onclick="stepSlider(5, -1)">[-]</button>
-              <input type="range" class="range-input" id="range-5" min="0" max="200" value="0" oninput="updateSliderVal(5, 'val-5')">
-              <button class="step-btn" onclick="stepSlider(5, 1)">[+]</button>
+              <button class="step-btn" onclick="stepSlider(5,-1)">[-]</button>
+              <input type="range" class="range-input" id="range-5" min="0" max="200" value="0" oninput="updateSliderVal(5,'val-5')">
+              <button class="step-btn" onclick="stepSlider(5,1)">[+]</button>
             </div>
           </div>
 
-          <!-- Slider 6: Nút camera tự do (Free Look) -->
-          <div class="slider-wrapper glass-panel">
-            <div class="slider-header">
+          <div class="slider-wrapper">
+            <div class="slider-hd">
               <div>
-                <span class="slider-title">Nút camera tự do</span>
-                <span class="slider-sub">Free Look · Camera Sensitivity</span>
+                <span class="slider-name">Nút camera tự do</span>
+                <span class="slider-subn">Free Look · Camera Sensitivity</span>
               </div>
-              <span class="slider-value" id="val-6">--</span>
+              <span class="slider-val-display" id="val-6">--</span>
             </div>
             <div class="slider-controls">
-              <button class="step-btn" onclick="stepSlider(6, -1)">[-]</button>
-              <input type="range" class="range-input" id="range-6" min="0" max="200" value="0" oninput="updateSliderVal(6, 'val-6')">
-              <button class="step-btn" onclick="stepSlider(6, 1)">[+]</button>
+              <button class="step-btn" onclick="stepSlider(6,-1)">[-]</button>
+              <input type="range" class="range-input" id="range-6" min="0" max="200" value="0" oninput="updateSliderVal(6,'val-6')">
+              <button class="step-btn" onclick="stepSlider(6,1)">[+]</button>
             </div>
           </div>
 
-          <!-- Slider 7: Kích thước Nút Bắn (Fire Button Size) -->
-          <div class="slider-wrapper glass-panel fire-button-wrapper">
-            <div class="slider-header">
+          <div class="slider-wrapper fire-wrapper">
+            <div class="slider-hd">
               <div>
-                <span class="slider-title fire-neon-text">Kích thước Nút Bắn</span>
-                <span class="slider-sub">Fire Button Size · Precision Control</span>
+                <span class="slider-name fire-name">Kích thước Nút Bắn</span>
+                <span class="slider-subn">Fire Button Size · Precision Control</span>
               </div>
-              <span class="slider-value fire-neon-text" id="val-7">--</span>
+              <span class="slider-val-display fire-val" id="val-7">--</span>
             </div>
             <div class="slider-controls">
-              <button class="step-btn fire-step-btn" onclick="stepSlider(7, -1)">[-]</button>
-              <input type="range" class="range-input fire-range" id="range-7" min="10" max="100" value="10" oninput="updateSliderVal(7, 'val-7')">
-              <button class="step-btn fire-step-btn" onclick="stepSlider(7, 1)">[+]</button>
+              <button class="step-btn fire-step" onclick="stepSlider(7,-1)">[-]</button>
+              <input type="range" class="range-input fire-range" id="range-7" min="10" max="100" value="10" oninput="updateSliderVal(7,'val-7')">
+              <button class="step-btn fire-step" onclick="stepSlider(7,1)">[+]</button>
             </div>
           </div>
 
+        </div><!-- end sliders-container -->
+
+        <div class="designer-footer">
+          <div class="designer-line"></div>
+          <div class="designer-credit">Web designed by Duc Anh Zev</div>
+          <div class="designer-version">v4.0.0 · QUANTUM · ducanhzev.pages.dev</div>
         </div>
-      </div>
 
-      <div class="designer-footer">
-        <div class="designer-line"></div>
-        <div class="designer-credit">Web designed by Duc Anh Zev</div>
-        <div class="designer-version">v3.2.0 · OB54 PRO · ducanhzev.pages.dev</div>
-      </div>
+      </div><!-- end panel-2 -->
 
-    </div><!-- end panel-2 -->
-
-  </main>
+    </main>
+  </div><!-- end main-app -->
 
   <!-- ═══════════════════════════════════════════════════════
        TOAST NOTIFICATION
        ═══════════════════════════════════════════════════════ -->
-  <div id="app-toast" role="alert" aria-live="polite">
+  <div id="app-toast">
     <div class="toast-dot"></div>
-    <span id="app-toast-text">Đã bật chức năng này thành công!</span>
+    <span id="app-toast-text">OPERATION SUCCESSFUL</span>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════
        INSTALL MODAL
        ═══════════════════════════════════════════════════════ -->
   <div id="install-modal-overlay" onclick="closeInstallModal(event)">
-    <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-box" onclick="event.stopPropagation()">
       <div class="modal-handle"></div>
-      <div class="modal-title">Cài Cấu Hình Web Clip</div>
-      <div class="modal-subtitle">Thêm Zev Boost vào màn hình chính iPhone của bạn</div>
-
+      <div class="modal-title">CÀI WEB CLIP ZEV BOOST</div>
+      <div class="modal-sub">Thêm ZEV BOOST QUANTUM vào màn hình chính iPhone</div>
       <div class="modal-step">
         <div class="modal-step-num">1</div>
-        <div class="modal-step-text">Tải file <strong>ZevBoost.mobileconfig</strong> từ repository GitHub của Zev Boost về thiết bị iOS.</div>
+        <div class="modal-step-text">Tải file <strong>ZevBoost.mobileconfig</strong> từ repo GitHub về thiết bị iOS.</div>
       </div>
       <div class="modal-step">
         <div class="modal-step-num">2</div>
-        <div class="modal-step-text">Truy cập <strong>Cài đặt → Đã tải về Hồ sơ</strong> và nhấn <strong>Cài đặt</strong> để xác nhận cài profile.</div>
+        <div class="modal-step-text">Vào <strong>Cài đặt → Đã tải về Hồ sơ</strong> và nhấn <strong>Cài đặt</strong>.</div>
       </div>
       <div class="modal-step">
         <div class="modal-step-num">3</div>
-        <div class="modal-step-text">Nếu cần ký profile tự ký, sử dụng <a class="modal-link" href="https://vsign.me" target="_blank">vsign.me</a> hoặc công cụ OpenSSL để tạo chứng chỉ hợp lệ.</div>
+        <div class="modal-step-text">Ký profile bằng <strong>vsign.me</strong> hoặc OpenSSL nếu cần chứng chỉ hợp lệ.</div>
       </div>
       <div class="modal-step">
         <div class="modal-step-num">4</div>
-        <div class="modal-step-text">Sau khi cài đặt thành công, biểu tượng <strong>Zev Boost</strong> sẽ xuất hiện trên màn hình chính iOS dưới dạng Web Clip toàn màn hình.</div>
+        <div class="modal-step-text">Sau cài đặt, biểu tượng <strong>ZEV QUANTUM</strong> xuất hiện trên màn hình chính iOS.</div>
       </div>
-      <div class="modal-step">
-        <div class="modal-step-num">5</div>
-        <div class="modal-step-text">Khởi động Web Clip và trải nghiệm dashboard tối ưu hóa OB54 PRO của bạn!</div>
-      </div>
-
-      <button class="modal-close-btn" onclick="closeInstallModalBtn()">Đã hiểu, Đóng lại</button>
+      <button class="modal-close-btn" onclick="closeInstallModalBtn()">[ CLOSE_TERMINAL ]</button>
     </div>
   </div>
 
-  <script>
-    /* ═══════════════════════════════════════════════════════
-       TOAST ENGINE
-       ═══════════════════════════════════════════════════════ */
-    let toastTimer = null;
+</div><!-- end app-root -->
 
-    function showToast(msg) {
-      const toast = document.getElementById('app-toast');
-      const textEl = document.getElementById('app-toast-text');
-      if (toastTimer) {
-        clearTimeout(toastTimer);
-        toast.classList.remove('show', 'hide');
-        // force reflow
-        void toast.offsetWidth;
+<script>
+  /* ═══════════════════════════════════════════════════════
+     MATRIX CANVAS RAIN
+     ═══════════════════════════════════════════════════════ */
+  (function initMatrixRain() {
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*(){}[]<>/\\|~'.split('');
+    let columns = 0;
+    let drops = [];
+    let raf = null;
+
+    function resize() {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      columns = Math.floor(canvas.width / 14);
+      drops = Array.from({ length: columns }, () => Math.random() * -50);
+    }
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.font = '12px Share Tech Mono, monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const char = CHARS[Math.floor(Math.random() * CHARS.length)];
+        const y = drops[i] * 14;
+
+        if (y > 0 && y < canvas.height * 0.4) {
+          ctx.fillStyle = '#00ff66';
+        } else {
+          ctx.fillStyle = 'rgba(0, 255, 102, 0.45)';
+        }
+
+        ctx.fillText(char, i * 14, y);
+
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i] += 0.5;
       }
-      textEl.textContent = msg || 'Đã bật chức năng này thành công!';
-      toast.classList.remove('hide');
-      toast.classList.add('show');
-      toastTimer = setTimeout(() => {
-        toast.classList.remove('show');
-        toast.classList.add('hide');
-        toastTimer = null;
-      }, 2800);
+      raf = requestAnimationFrame(draw);
     }
 
-    function haptic(pattern) {
-      if (navigator.vibrate) {
-        navigator.vibrate(pattern || [15]);
+    resize();
+    window.addEventListener('resize', resize);
+    draw();
+
+    window._stopMatrixRain = function() {
+      if (raf) cancelAnimationFrame(raf);
+    };
+  })();
+
+  /* ═══════════════════════════════════════════════════════
+     LICENSE KEY VALIDATION
+     ═══════════════════════════════════════════════════════ */
+  const LICENSE_CONFIG = {
+    day:   { regex: /^ZEV-DAY-(0[0-4][0-9]|050)$/, duration: 86400,   label: 'DAY_1D',    tier: 'day'   },
+    week:  { regex: /^ZEV-WEEK-(0[0-4][0-9]|050)$/, duration: 604800,  label: 'WEEK_7D',   tier: 'week'  },
+    month: { regex: /^ZEV-MONTH-(0[0-4][0-9]|050)$/, duration: 2592000, label: 'MONTH_30D', tier: 'month' }
+  };
+
+  function checkExistingLicense() {
+    const expiry = parseInt(localStorage.getItem('zev_expiry_time') || '0', 10);
+    const tier   = localStorage.getItem('zev_license_tier') || '';
+    const now    = Math.floor(Date.now() / 1000);
+
+    if (expiry > now && tier) {
+      unlockMainframe(tier, false);
+    }
+  }
+
+  function injectLicense() {
+    const key      = document.getElementById('hacker-key-input').value.trim();
+    const statusEl = document.getElementById('lock-status');
+
+    if (!key) {
+      statusEl.className = 'error';
+      statusEl.textContent = '[ ERROR: NULL KEY DETECTED — INJECTION ABORTED ]';
+      return;
+    }
+
+    let matchedTier = null;
+    for (const [tierId, cfg] of Object.entries(LICENSE_CONFIG)) {
+      if (cfg.regex.test(key)) {
+        matchedTier = { tierId, cfg };
+        break;
       }
     }
 
-    /* ═══════════════════════════════════════════════════════
-       TAB SWITCHING
-       ═══════════════════════════════════════════════════════ */
-    function switchTab(idx) {
-      haptic([10]);
-      const panels = document.querySelectorAll('.tab-panel');
-      const btns = document.querySelectorAll('.tab-btn');
-      const glider = document.getElementById('tab-glider');
-
-      panels.forEach((p, i) => {
-        p.classList.toggle('active', i === idx);
-      });
-      btns.forEach((b, i) => {
-        b.classList.toggle('active', i === idx);
-        b.setAttribute('aria-selected', i === idx ? 'true' : 'false');
-      });
-
-      const trackW = document.getElementById('tabs-track').offsetWidth - 6;
-      glider.style.transform = `translateX(${idx * (trackW / 3)}px)`;
+    if (!matchedTier) {
+      statusEl.className = 'error';
+      statusEl.textContent = '[ ACCESS DENIED: INVALID KEY STRUCTURE — SYSTEM LOCKED ]';
+      if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+      return;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       TOGGLE HANDLERS
-       ═══════════════════════════════════════════════════════ */
-    function handleToggle(event, switchId) {
-      const sw = document.getElementById(switchId);
-      if (sw && event.target !== sw && event.target.tagName !== 'SPAN') {
-        sw.checked = !sw.checked;
-        sw.dispatchEvent(new Event('change'));
+    statusEl.className = 'inject';
+    statusEl.textContent = '🔓 INJECTING BYPASS EXPLOIT... SUCCESSFUL!';
+    if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
+
+    const { tierId, cfg } = matchedTier;
+    const now    = Math.floor(Date.now() / 1000);
+    const expiry = now + cfg.duration;
+    localStorage.setItem('zev_expiry_time', expiry.toString());
+    localStorage.setItem('zev_license_tier', tierId);
+
+    setTimeout(() => {
+      unlockMainframe(tierId, true);
+    }, 2500);
+  }
+
+  function unlockMainframe(tier, animate) {
+    const lockEl   = document.getElementById('terminal-lock-screen');
+    const mainEl   = document.getElementById('main-app');
+    const badgeEl  = document.getElementById('license-badge');
+    const cfg      = LICENSE_CONFIG[tier];
+
+    if (!cfg) return;
+
+    badgeEl.textContent = cfg.label;
+    badgeEl.className   = `${tier}`;
+
+    if (animate) {
+      lockEl.style.transition = 'opacity 0.6s ease';
+      lockEl.style.opacity = '0';
+      setTimeout(() => {
+        lockEl.style.display = 'none';
+        window._stopMatrixRain && window._stopMatrixRain();
+        mainEl.classList.add('visible');
+        showToast('⚡ MAINFRAME UNLOCKED — WELCOME OPERATOR');
+      }, 650);
+    } else {
+      lockEl.style.display = 'none';
+      window._stopMatrixRain && window._stopMatrixRain();
+      mainEl.classList.add('visible');
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     TOAST ENGINE
+     ═══════════════════════════════════════════════════════ */
+  let toastTimer = null;
+
+  function showToast(msg) {
+    const toast  = document.getElementById('app-toast');
+    const textEl = document.getElementById('app-toast-text');
+    if (toastTimer) {
+      clearTimeout(toastTimer);
+      toast.classList.remove('show', 'hide');
+      void toast.offsetWidth;
+    }
+    textEl.textContent = msg || 'OPERATION SUCCESSFUL';
+    toast.classList.remove('hide');
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+      toast.classList.add('hide');
+      toastTimer = null;
+    }, 2800);
+  }
+
+  function haptic(pattern) {
+    if (navigator.vibrate) navigator.vibrate(pattern || [15]);
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     TAB SWITCHING
+     ═══════════════════════════════════════════════════════ */
+  function switchTab(idx) {
+    haptic([10]);
+    document.querySelectorAll('.tab-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+    document.querySelectorAll('.tab-nav-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     OVERCLOCK CORE ENGINE
+     ═══════════════════════════════════════════════════════ */
+  let isOverclockActive = false;
+  let wakeLockRef       = null;
+  let rafLoopId         = null;
+  let logIntervalId     = null;
+
+  const LOG_LINES = [
+    { text: '[ROOT@ZEV_CORE:~]$ nvram boot-args="gpu_perf_mode=1"',                           cls: ''      },
+    { text: '[SYS] BYPASSING APPLE THERMAL LIMITS...',                                         cls: 'amber' },
+    { text: '[TOUCH] INTERPOLATING PROMOTION POLLING RATIO: 1000Hz...',                        cls: 'cyan'  },
+    { text: '[ROOT@ZEV_CORE:~]$ sysctl -w kern.sched_preempt_pri=80',                          cls: ''      },
+    { text: '[GPU] METAL PERFORMANCE SHADER PIPELINE INJECTED',                                cls: 'cyan'  },
+    { text: '[ROOT@ZEV_CORE:~]$ defaults write com.apple.springboard SBShowTouchHighlight 0',  cls: ''      },
+    { text: '[NET] UDP PACKET QUEUE PRIORITY SET TO REALTIME',                                  cls: 'cyan'  },
+    { text: '[SYS] ANTI-THROTTLE GOVERNOR: PERFORMANCE MODE LOCKED',                           cls: 'amber' },
+    { text: '[ROOT@ZEV_CORE:~]$ launchctl setenv NSAnimationDuration 0',                       cls: ''      },
+    { text: '[RAF] REQUESTANIMATIONFRAME LOOP: 120Hz TARGET ACHIEVED',                          cls: 'cyan'  },
+    { text: '[ROOT@ZEV_CORE:~]$ nvram gpufw_load_to_bproc=1',                                  cls: ''      },
+    { text: '[TOUCH] GESTURE RECOGNIZER LATENCY: 0.001ms',                                      cls: 'cyan'  },
+    { text: '[SYS] COMPRESSION SWAP DISABLED: RAM FREED',                                       cls: 'amber' },
+    { text: '[ROOT@ZEV_CORE:~]$ killall backboardd',                                            cls: 'pink'  },
+    { text: '[GPU] TILE RENDERER BATCH SIZE: MAX_OVERRIDE',                                     cls: 'cyan'  },
+  ];
+
+  let logLineIndex = 0;
+
+  function addLogLine(text, cls) {
+    const logEl = document.getElementById('hacker-log');
+    const span  = document.createElement('span');
+    span.className = `log-line ${cls || ''}`;
+    span.textContent = text;
+    logEl.appendChild(span);
+    logEl.scrollTop = logEl.scrollHeight;
+    if (logEl.children.length > 40) logEl.removeChild(logEl.firstChild);
+  }
+
+  async function toggleOverclock() {
+    haptic([30, 30, 30]);
+    isOverclockActive = !isOverclockActive;
+
+    const ring       = document.getElementById('core-ring');
+    const btnLabel   = document.getElementById('core-btn-label');
+    const statusTxt  = document.getElementById('core-status-text');
+    const statFps    = document.getElementById('stat-fps');
+    const statTouch  = document.getElementById('stat-touch');
+    const statLock   = document.getElementById('stat-lock');
+
+    if (isOverclockActive) {
+      ring.classList.add('active');
+      btnLabel.textContent = 'ONLINE';
+      statusTxt.textContent = '[ OVERCLOCKING MODE ACTIVE — REACTOR ONLINE ]';
+      statusTxt.classList.add('active');
+      statFps.textContent   = '120Hz';
+      statFps.classList.add('active-val');
+      statFps.classList.remove('dim');
+      statTouch.textContent = '1000Hz';
+      statTouch.classList.add('active-val');
+      statTouch.classList.remove('dim');
+
+      // Wake Lock
+      try {
+        wakeLockRef = await navigator.wakeLock.request('screen');
+        statLock.textContent = 'ACTIVE';
+        statLock.classList.add('active-val');
+        statLock.classList.remove('dim');
+        addLogLine('[WAKELOCK] SCREEN SLEEP PREVENTION: ENGAGED', 'cyan');
+      } catch (e) {
+        statLock.textContent = 'DENIED';
+        addLogLine('[WAKELOCK] PERMISSION DENIED — CONTINUING WITHOUT', 'amber');
       }
+
+      // RAF Loop — force GPU polling
+      let rafCount = 0;
+      function rafLoop() {
+        rafCount++;
+        if (rafCount % 60 === 0) {
+          const lineData = LOG_LINES[logLineIndex % LOG_LINES.length];
+          addLogLine(lineData.text, lineData.cls);
+          logLineIndex++;
+        }
+        if (isOverclockActive) rafLoopId = requestAnimationFrame(rafLoop);
+      }
+      rafLoopId = requestAnimationFrame(rafLoop);
+
+      addLogLine('[SYS] OVERCLOCKING SEQUENCE INITIATED...', 'amber');
+      addLogLine('[ROOT@ZEV_CORE:~]$ nvram boot-args="gpu_perf_mode=1"', '');
+      addLogLine('[SYS] BYPASSING APPLE THERMAL LIMITS...', 'amber');
+      addLogLine('[TOUCH] INTERPOLATING PROMOTION POLLING RATIO: 1000Hz...', 'cyan');
+
+      showToast('⚡ OVERCLOCK ACTIVATED — REACTOR ONLINE');
+    } else {
+      ring.classList.remove('active');
+      btnLabel.textContent = 'ACTIVATE';
+      statusTxt.textContent = '[ SYSTEM STANDBY — REACTOR OFFLINE ]';
+      statusTxt.classList.remove('active');
+      statFps.textContent   = '—';
+      statFps.classList.remove('active-val');
+      statFps.classList.add('dim');
+      statTouch.textContent = '—';
+      statTouch.classList.remove('active-val');
+      statTouch.classList.add('dim');
+      statLock.textContent  = '—';
+      statLock.classList.remove('active-val');
+      statLock.classList.add('dim');
+
+      if (wakeLockRef) {
+        wakeLockRef.release();
+        wakeLockRef = null;
+      }
+
+      if (rafLoopId) {
+        cancelAnimationFrame(rafLoopId);
+        rafLoopId = null;
+      }
+
+      addLogLine('[SYS] REACTOR SHUTDOWN SEQUENCE INITIATED', 'amber');
+      addLogLine('[SYS] SYSTEM RETURNING TO STANDBY MODE', 'muted');
+      showToast('[ OVERCLOCK DEACTIVATED — STANDBY MODE ]');
     }
+  }
 
-    function handleSwitchChange(el) {
-      haptic([15]);
-      showToast('Đã bật chức năng này thành công!');
+  /* ═══════════════════════════════════════════════════════
+     TOGGLE CARDS
+     ═══════════════════════════════════════════════════════ */
+  function handleToggle(event, switchId) {
+    const sw = document.getElementById(switchId);
+    if (sw && event.target !== sw && event.target.tagName !== 'SPAN') {
+      sw.checked = !sw.checked;
+      sw.dispatchEvent(new Event('change'));
     }
+  }
 
-    function toggleRamDot(el) {
-      const dot = document.getElementById('ram-dot');
-      if (dot) dot.classList.toggle('visible', el.checked);
-    }
+  function onToggleChange(el) {
+    haptic([15]);
+    const card = el.closest('.toggle-card');
+    if (card) card.classList.toggle('active-card', el.checked);
+    showToast('⚡ ĐÃ BẬT CHỨC NĂNG THÀNH CÔNG!');
+  }
 
-    /* ═══════════════════════════════════════════════════════
-       DNS ACCELERATOR
-       ═══════════════════════════════════════════════════════ */
-    const DNS_PROFILES = [
-      { name: 'Cloudflare Hyper-Speed', sub: 'Ultra-fast resolver', ip1: '1.1.1.1', ip2: '1.0.0.1' },
-      { name: 'Google Public Core', sub: 'Reliable global DNS', ip1: '8.8.8.8', ip2: '8.8.4.4' },
-      { name: 'AdGuard Gaming Shield', sub: 'Ad-blocked gaming', ip1: '94.140.14.14', ip2: '94.140.15.15' },
-      { name: 'Quad9 Secure Core', sub: 'Threat-blocking DNS', ip1: '9.9.9.9', ip2: '149.112.112.112' },
-      { name: 'OpenDNS Home Speed', sub: 'Customizable resolver', ip1: '208.67.222.222', ip2: '208.67.220.220' },
-      { name: 'CleanBrowsing Gaming', sub: 'Clean & fast gaming', ip1: '185.228.168.168', ip2: '185.228.169.168' },
-      { name: 'Comodo Secure', sub: 'Malware protection', ip1: '8.26.56.26', ip2: '8.20.247.20' },
-      { name: 'Level3 Infrastructure', sub: 'Enterprise-grade DNS', ip1: '209.244.0.3', ip2: '209.244.0.4' },
-    ];
+  /* ═══════════════════════════════════════════════════════
+     DNS ACCELERATOR
+     ═══════════════════════════════════════════════════════ */
+  const DNS_PROFILES = [
+    { name: 'Cloudflare Hyper-Speed', sub: 'Ultra-fast resolver',  ip1: '1.1.1.1',         ip2: '1.0.0.1'         },
+    { name: 'Google Public Core',      sub: 'Reliable global DNS',  ip1: '8.8.8.8',          ip2: '8.8.4.4'          },
+    { name: 'AdGuard Gaming Shield',   sub: 'Ad-blocked gaming',    ip1: '94.140.14.14',     ip2: '94.140.15.15'     },
+    { name: 'Quad9 Secure Core',       sub: 'Threat-blocking DNS',  ip1: '9.9.9.9',           ip2: '149.112.112.112'  },
+    { name: 'OpenDNS Home Speed',      sub: 'Customizable resolver',ip1: '208.67.222.222',   ip2: '208.67.220.220'   },
+    { name: 'CleanBrowsing Gaming',    sub: 'Clean & fast gaming',  ip1: '185.228.168.168',  ip2: '185.228.169.168'  },
+    { name: 'Comodo Secure',           sub: 'Malware protection',   ip1: '8.26.56.26',       ip2: '8.20.247.20'      },
+    { name: 'Level3 Infrastructure',   sub: 'Enterprise-grade DNS', ip1: '209.244.0.3',      ip2: '209.244.0.4'      },
+  ];
 
-    function buildDnsGrid() {
-      const grid = document.getElementById('dns-grid');
-      grid.innerHTML = DNS_PROFILES.map((dns, idx) => `
-        <div class="dns-card glass-panel" id="dns-card-${idx}">
-          <div class="dns-card-header">
-            <div>
-              <div class="dns-name">${dns.name}</div>
-              <div class="dns-sub">${dns.sub}</div>
-            </div>
-            <label class="dns-toggle-switch" onclick="event.stopPropagation()">
-              <input type="checkbox" id="dns-toggle-${idx}" onchange="activateDns(${idx}, this)">
-              <span class="dns-toggle-track"></span>
-            </label>
+  function buildDnsGrid() {
+    const grid = document.getElementById('dns-grid');
+    grid.innerHTML = DNS_PROFILES.map((dns, idx) => `
+      <div class="dns-card" id="dns-card-${idx}">
+        <div class="dns-card-header">
+          <div>
+            <div class="dns-name">${dns.name}</div>
+            <div class="dns-sub">${dns.sub}</div>
           </div>
-          <div class="dns-ips">
-            <div class="dns-ip-row">
-              <span class="dns-ip-text">${dns.ip1}</span>
-              <button class="copy-ip-btn" onclick="copyDnsIp('${dns.ip1}', '${dns.name}', 1)">Copy IP 1</button>
-            </div>
-            <div class="dns-ip-row">
-              <span class="dns-ip-text">${dns.ip2}</span>
-              <button class="copy-ip-btn" onclick="copyDnsIp('${dns.ip2}', '${dns.name}', 2)">Copy IP 2</button>
-            </div>
-          </div>
+          <label class="dns-mini-switch" onclick="event.stopPropagation()">
+            <input type="checkbox" id="dns-sw-${idx}" onchange="activateDns(${idx}, this)">
+            <span class="dns-sw-track"></span>
+          </label>
         </div>
-      `).join('');
+        <div class="dns-ip-row">
+          <span class="dns-ip-text">${dns.ip1}</span>
+          <button class="copy-btn" onclick="copyDnsIp('${dns.ip1}','${dns.name}',1)">COPY IP1</button>
+        </div>
+        <div class="dns-ip-row">
+          <span class="dns-ip-text">${dns.ip2}</span>
+          <button class="copy-btn" onclick="copyDnsIp('${dns.ip2}','${dns.name}',2)">COPY IP2</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function copyDnsIp(ip, name, num) {
+    haptic([15]);
+    const txt = `${name} IP${num}: ${ip}`;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ip).then(() => showToast(`✓ COPIED: ${ip}`)).catch(() => { fallbackCopy(ip); showToast(`✓ COPIED: ${ip}`); });
+    } else {
+      fallbackCopy(ip);
+      showToast(`✓ COPIED: ${ip}`);
+    }
+  }
+
+  function activateDns(idx, el) {
+    haptic([15]);
+    document.querySelectorAll('.dns-card').forEach((card, i) => card.classList.toggle('active-dns', i === idx && el.checked));
+    showToast(el.checked ? `✓ DNS ${DNS_PROFILES[idx].name} ACTIVATED` : '[ DNS PROFILE DEACTIVATED ]');
+  }
+
+  function fallbackCopy(text) {
+    const el = document.createElement('textarea');
+    el.value = text;
+    el.style.cssText = 'position:fixed;opacity:0;';
+    document.body.appendChild(el);
+    el.focus();
+    el.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(el);
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     MOBILECONFIG GENERATOR & DOWNLOAD
+     ═══════════════════════════════════════════════════════ */
+  function downloadMobileConfig() {
+    haptic([30]);
+    const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+            <key>PayloadDescription</key>
+            <string>ZEV QUANTUM OVERLORD - High Priority Network Override</string>
+            <key>PayloadDisplayName</key>
+            <string>ZEV QUANTUM DNS Critical</string>
+            <key>PayloadIdentifier</key>
+            <string>com.zevquantum.dns.managed</string>
+            <key>PayloadType</key>
+            <string>com.apple.dnsSettings.managed</string>
+            <key>PayloadUUID</key>
+            <string>Q1N2V3A4-B5C6-7D8E-9F0A-1B2C3D4E5F6A</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>DNSSettings</key>
+            <dict>
+                <key>DNSProtocol</key>
+                <string>HTTPS</string>
+                <key>ServerURL</key>
+                <string>https://cloudflare-dns.com/dns-query</string>
+                <key>ServerAddresses</key>
+                <array>
+                    <string>1.1.1.1</string>
+                    <string>1.0.0.1</string>
+                    <string>8.8.8.8</string>
+                    <string>8.8.4.4</string>
+                    <string>2606:4700:4700::1111</string>
+                    <string>2606:4700:4700::1001</string>
+                </array>
+            </dict>
+        </dict>
+    </array>
+    <key>PayloadDisplayName</key>
+    <string>ZEV QUANTUM PROFILE</string>
+    <key>PayloadIdentifier</key>
+    <string>com.zevquantum.profile</string>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>Z1E2V3B4-O5O6-7S8T-9U0L-1A2R3D4F5G6H</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+</dict>
+</plist>`;
+
+    const blob = new Blob([xmlContent], { type: 'application/x-apple-aspen-config' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = 'ZevQuantum_DNS_Critical.mobileconfig';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    showToast('⬇ MOBILECONFIG GENERATED — CHECK DOWNLOADS');
+    addLogLine('[NET] DNS PROFILE INJECTED: ZevQuantum_DNS_Critical.mobileconfig', 'cyan');
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     MODAL
+     ═══════════════════════════════════════════════════════ */
+  function openInstallModal() {
+    haptic([15]);
+    document.getElementById('install-modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeInstallModal(event) {
+    document.getElementById('install-modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeInstallModalBtn() {
+    haptic([10]);
+    closeInstallModal();
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     COPY SHARE LINK
+     ═══════════════════════════════════════════════════════ */
+  function copyShareLink() {
+    haptic([40]);
+    const url = 'https://ducanhzev.pages.dev/';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => showToast('✓ LINK COPIED: ducanhzev.pages.dev')).catch(() => { fallbackCopy(url); showToast('✓ LINK COPIED: ducanhzev.pages.dev'); });
+    } else {
+      fallbackCopy(url);
+      showToast('✓ LINK COPIED: ducanhzev.pages.dev');
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     OB54 SENSITIVITY TUNER
+     ═══════════════════════════════════════════════════════ */
+  let calibInterval = null;
+
+  function validateDevice(modelName) {
+    const name = modelName.toLowerCase().replace(/\s+/g, '');
+    return /iphone(7|8|x|xs|xr|11|12|13|14|15|16)/.test(name) ||
+           /(7plus|8plus|xsmax|promax|11pro|12pro|13pro|14pro|15pro|16pro|12mini|13mini|14plus|15plus|16plus)/.test(name) ||
+           ['iphone7','iphone8','iphonex','iphonexr','iphonexs','iphonexsmax',
+            'iphone11','iphone12','iphone13','iphone14','iphone15','iphone16'].some(d => name.includes(d));
+  }
+
+  function getDeviceCategory(modelName) {
+    const name = modelName.toLowerCase().replace(/\s+/g, '');
+    if (/(14|15|16)/.test(name)) return 3;
+    if (/(11|12|13)/.test(name)) return 2;
+    return 1;
+  }
+
+  function checkDeviceInput() {
+    const val = document.getElementById('device-model').value.trim();
+    document.getElementById('calibrate-btn').disabled = val.length < 2;
+  }
+
+  function executeCalibration() {
+    const btn       = document.getElementById('calibrate-btn');
+    const status    = document.getElementById('calibration-status');
+    const model     = document.getElementById('device-model').value.trim();
+    const container = document.getElementById('sliders-container');
+
+    if (!validateDevice(model)) {
+      status.className = 'error';
+      status.innerHTML = '❌ Thiết bị không hợp lệ hoặc cấu trúc phần cứng không được hỗ trợ phân tích!';
+      haptic([100, 50, 100]);
+      return;
     }
 
-    function copyDnsIp(ip, name, num) {
-      haptic([15]);
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(ip).then(() => {
-          showToast(`Đã sao chép ${name} IP ${num}: ${ip}`);
-        }).catch(() => fallbackCopy(ip));
-      } else {
-        fallbackCopy(ip);
-        showToast(`Đã sao chép ${name} IP ${num}: ${ip}`);
-      }
-    }
+    btn.disabled = true;
+    status.className = 'scanning';
+    let progress = 0;
+    if (calibInterval) clearInterval(calibInterval);
+    haptic([30, 30]);
 
-    function activateDns(idx, el) {
-      haptic([15]);
-      document.querySelectorAll('.dns-card').forEach((card, i) => {
-        card.classList.toggle('active-dns', i === idx && el.checked);
-      });
-      if (el.checked) {
-        showToast(`DNS ${DNS_PROFILES[idx].name} đã kích hoạt!`);
-      } else {
-        showToast('Đã tắt DNS profile này.');
-      }
-    }
+    calibInterval = setInterval(() => {
+      progress += 20;
+      btn.textContent = `ANALYZING INTERFACE MATRIX... ${progress}%`;
+      status.innerHTML = `⏳ Thuật toán AI đang phân tích dữ liệu màn hình cho <strong>${model}</strong>...`;
+      haptic([10]);
 
-    function fallbackCopy(text) {
-      const el = document.createElement('textarea');
-      el.value = text;
-      el.style.position = 'fixed';
-      el.style.opacity = '0';
-      document.body.appendChild(el);
-      el.focus();
-      el.select();
-      try { document.execCommand('copy'); } catch(e) {}
-      document.body.removeChild(el);
-    }
+      if (progress >= 100) {
+        clearInterval(calibInterval);
+        calibInterval = null;
 
-    /* ═══════════════════════════════════════════════════════
-       OB54 SENSITIVITY TUNER ENGINE
-       ═══════════════════════════════════════════════════════ */
-    let calibInterval = null;
+        btn.textContent  = '✓ HOÀN THÀNH CẤU HÌNH';
+        status.className = 'ok';
+        status.innerHTML = `✅ ĐỒNG BỘ THÀNH CÔNG ĐỘ NHẠY KÉO TÂM CHO: <strong>${model}</strong>`;
 
-    function validateDevice(modelName) {
-      const name = modelName.toLowerCase().replace(/\s+/g, '');
-      
-      const validDevices = [
-        'iphone7', 'iphone7plus', '7plus',
-        'iphone8', 'iphone8plus', '8plus',
-        'iphonex', 'iphonexr', 'iphonexs', 'iphonexsmax', 'xsmax', 'xr', 'xs',
-        'iphone11', 'iphone11pro', 'iphone11promax', '11pro', '11promax',
-        'iphone12', 'iphone12pro', 'iphone12promax', 'iphone12mini', '12pro', '12promax', '12mini',
-        'iphone13', 'iphone13pro', 'iphone13promax', 'iphone13mini', '13pro', '13promax', '13mini',
-        'iphone14', 'iphone14pro', 'iphone14promax', 'iphone14plus', '14pro', '14promax', '14plus',
-        'iphone15', 'iphone15pro', 'iphone15promax', 'iphone15plus', '15pro', '15promax', '15plus',
-        'iphone16', 'iphone16pro', 'iphone16promax', 'iphone16plus', '16pro', '16promax', '16plus'
-      ];
+        const cat = getDeviceCategory(model);
+        let config = {};
+        if (cat === 1)      config = { 1:182, 2:188, 3:192, 4:165, 5:30,  6:95, 7:42 };
+        else if (cat === 3) config = { 1:152, 2:147, 3:130, 4:122, 5:0,   6:85, 7:52 };
+        else                config = { 1:165, 2:170, 3:180, 4:148, 5:0,   6:93, 7:48 };
 
-      return validDevices.some(device => name.includes(device)) || 
-             /iphone(7|8|x|11|12|13|14|15|16)/.test(name) ||
-             /(7plus|8plus|xsmax|promax|11pro|12pro|13pro|14pro|15pro|16pro)/.test(name);
-    }
-
-    function getDeviceCategory(modelName) {
-      const name = modelName.toLowerCase().replace(/\s+/g, '');
-      
-      if (/(14|15|16)/.test(name)) {
-        return 3;
-      }
-      if (/(11|12|13)/.test(name)) {
-        return 2;
-      }
-      if (/(7|8|x)/.test(name)) {
-        return 1;
-      }
-      return 2;
-    }
-
-    function checkDeviceInput() {
-      const input = document.getElementById('device-model');
-      const btn = document.getElementById('calibrate-btn');
-      const val = input.value.trim();
-      btn.disabled = val.length < 2;
-    }
-
-    function executeCalibration() {
-      const btn = document.getElementById('calibrate-btn');
-      const status = document.getElementById('calibration-status');
-      const deviceModel = document.getElementById('device-model').value.trim();
-      const container = document.getElementById('sliders-container');
-
-      // Kiểm tra tính hợp lệ của thiết bị
-      if (!validateDevice(deviceModel)) {
-        status.className = 'error';
-        status.innerHTML = "❌ Thiết bị không hợp lệ hoặc cấu trúc phần cứng không được hỗ trợ phân tích!";
-        haptic([100, 50, 100]);
-        return;
-      }
-
-      btn.disabled = true;
-      status.className = 'analyzing';
-
-      let progress = 0;
-      if (calibInterval) clearInterval(calibInterval);
-
-      haptic([30, 30]);
-
-      calibInterval = setInterval(() => {
-        progress += 20;
-        btn.textContent = `ANALYZING INTERFACE MATRIX... ${progress}%`;
-        status.innerHTML = `⏳ Thuật toán AI đang phân tích dữ liệu màn hình cho <strong>${deviceModel}</strong>...`;
-
-        haptic([10]);
-
-        if (progress >= 100) {
-          clearInterval(calibInterval);
-          calibInterval = null;
-
-          btn.textContent = '✓ HOÀN THÀNH CẤU HÌNH';
-          status.className = 'success';
-          status.innerHTML = `✅ ĐỒNG BỘ THÀNH CÔNG ĐỘ NHẠY KÉO TÂM CHO: <strong>${deviceModel}</strong>`;
-
-          // Phân loại cấu hình động theo đời máy
-          const category = getDeviceCategory(deviceModel);
-          let config = {};
-
-          if (category === 1) {
-            config = { 1: 182, 2: 188, 3: 192, 4: 165, 5: 30, 6: 95, 7: 42 };
-          } else if (category === 3) {
-            config = { 1: 152, 2: 147, 3: 130, 4: 122, 5: 0, 6: 85, 7: 52 };
-          } else {
-            // Category 2
-            config = { 1: 165, 2: 170, 3: 180, 4: 148, 5: 0, 6: 93, 7: 48 };
-          }
-
-          for (let i = 1; i <= 7; i++) {
-            const rangeInput = document.getElementById(`range-${i}`);
-            const displayVal = document.getElementById(`val-${i}`);
-            const targetVal = config[i];
-
-            if (rangeInput && displayVal) {
-              rangeInput.value = targetVal;
-              displayVal.textContent = i === 7 ? `${targetVal}%` : targetVal;
-            }
-          }
-
-          container.style.display = 'block';
-          haptic([50, 100, 50]);
-
-          if (typeof showToast === 'function') {
-            showToast('⚡ Đồng bộ cấu hình độ nhạy thành công!');
+        for (let i = 1; i <= 7; i++) {
+          const rangeEl = document.getElementById(`range-${i}`);
+          const valEl   = document.getElementById(`val-${i}`);
+          if (rangeEl && valEl) {
+            rangeEl.value    = config[i];
+            valEl.textContent = i === 7 ? `${config[i]}%` : config[i];
           }
         }
-      }, 300);
-    }
 
-    function stepSlider(sliderId, direction) {
-      const rangeInput = document.getElementById(`range-${sliderId}`);
-      const displayVal = document.getElementById(`val-${sliderId}`);
-      if (!rangeInput || !displayVal) return;
-
-      let currentVal = parseInt(rangeInput.value, 10);
-      if (isNaN(currentVal)) {
-        currentVal = sliderId === 7 ? 10 : 0;
+        container.style.display = 'block';
+        haptic([50, 100, 50]);
+        showToast('⚡ ĐỘ NHẠY ĐÃ ĐƯỢC ĐỒNG BỘ THÀNH CÔNG!');
       }
+    }, 300);
+  }
 
-      const min = parseInt(rangeInput.min, 10);
-      const max = parseInt(rangeInput.max, 10);
+  function stepSlider(sliderId, direction) {
+    const rangeEl = document.getElementById(`range-${sliderId}`);
+    const valEl   = document.getElementById(`val-${sliderId}`);
+    if (!rangeEl || !valEl) return;
 
-      let newVal = currentVal + direction;
-      if (newVal < min) newVal = min;
-      if (newVal > max) newVal = max;
+    let cur = parseInt(rangeEl.value, 10);
+    if (isNaN(cur)) cur = sliderId === 7 ? 10 : 0;
 
-      rangeInput.value = newVal;
-      displayVal.textContent = sliderId === 7 ? `${newVal}%` : newVal;
+    const min = parseInt(rangeEl.min, 10);
+    const max = parseInt(rangeEl.max, 10);
+    let nv  = cur + direction;
+    if (nv < min) nv = min;
+    if (nv > max) nv = max;
 
-      haptic([10]);
-    }
+    rangeEl.value    = nv;
+    valEl.textContent = sliderId === 7 ? `${nv}%` : nv;
+    haptic([10]);
+  }
 
-    function updateSliderVal(sliderId, valId) {
-      const rangeInput = document.getElementById(`range-${sliderId}`);
-      const displayVal = document.getElementById(valId);
-      if (!rangeInput || !displayVal) return;
+  function updateSliderVal(sliderId, valId) {
+    const rangeEl = document.getElementById(`range-${sliderId}`);
+    const valEl   = document.getElementById(valId);
+    if (!rangeEl || !valEl) return;
+    const v = parseInt(rangeEl.value, 10);
+    valEl.textContent = sliderId === 7 ? `${v}%` : v;
+  }
 
-      const v = parseInt(rangeInput.value, 10);
-      displayVal.textContent = sliderId === 7 ? `${v}%` : v;
-    }
+  /* ═══════════════════════════════════════════════════════
+     LIVE TELEMETRY
+     ═══════════════════════════════════════════════════════ */
+  function initTelemetry() {
+    const ua = navigator.userAgent;
+    let gpu  = 'GPU_CORE';
+    if (/iPhone OS 1[78]/.test(ua))  gpu = 'A17_PRO';
+    else if (/iPhone OS 16/.test(ua)) gpu = 'A16_GPU';
+    else if (/iPhone OS 15/.test(ua)) gpu = 'A15_GPU';
+    else if (/iPhone OS 14/.test(ua)) gpu = 'A14_GPU';
+    document.getElementById('tele-gpu').textContent = gpu;
 
-    /* ═══════════════════════════════════════════════════════
-       MODAL
-       ═══════════════════════════════════════════════════════ */
-    function openInstallModal() {
-      haptic([15]);
-      document.getElementById('install-modal-overlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
+    let fps = 60.0, fpsDir = -1;
+    setInterval(() => {
+      fps += fpsDir * Math.random() * 0.2;
+      if (fps <= 59.5) fpsDir = 1;
+      if (fps >= 60.0) { fps = 60.0; fpsDir = -1; }
+      document.getElementById('tele-fps').textContent = fps.toFixed(1);
+    }, 1200);
 
-    function closeInstallModal(event) {
-      document.getElementById('install-modal-overlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
+    setInterval(() => {
+      const ping = Math.floor(22 + Math.random() * 12);
+      document.getElementById('tele-ping').textContent = ping + 'ms';
+    }, 1800);
+  }
 
-    function closeInstallModalBtn() {
-      haptic([10]);
-      closeInstallModal();
-    }
+  /* ═══════════════════════════════════════════════════════
+     PASSIVE LISTENERS — iOS PERFORMANCE
+     ═══════════════════════════════════════════════════════ */
+  window.addEventListener('scroll',    () => {}, { passive: true });
+  window.addEventListener('touchmove', () => {}, { passive: true });
 
-    /* ═══════════════════════════════════════════════════════
-       COPY SHARE LINK
-       ═══════════════════════════════════════════════════════ */
-    function copyShareLink() {
-      haptic([40]);
-      const url = 'https://ducanhzev.pages.dev/';
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(url).then(() => {
-          showToast('Đã sao chép link thành công!');
-        }).catch(() => {
-          fallbackCopy(url);
-          showToast('Đã sao chép link thành công!');
-        });
-      } else {
-        fallbackCopy(url);
-        showToast('Đã sao chép link thành công!');
-      }
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       LIVE TELEMETRY SIMULATION
-       ═══════════════════════════════════════════════════════ */
-    function initTelemetry() {
-      // Detect GPU model from UA
-      const ua = navigator.userAgent;
-      let gpuLabel = 'Apple GPU';
-      if (/iPhone OS 17|iPhone OS 18/.test(ua)) gpuLabel = 'A17 GPU';
-      else if (/iPhone OS 16/.test(ua)) gpuLabel = 'A16 GPU';
-      else if (/iPhone OS 15/.test(ua)) gpuLabel = 'A15 GPU';
-      else if (/iPhone OS 14/.test(ua)) gpuLabel = 'A14 GPU';
-      document.getElementById('tele-gpu').textContent = gpuLabel;
-
-      // Animate FPS between 59.5–60.0
-      let fpsDir = -1;
-      let fps = 60.0;
-      setInterval(() => {
-        fps += fpsDir * (Math.random() * 0.3);
-        if (fps <= 59.4) fpsDir = 1;
-        if (fps >= 60.0) { fps = 60.0; fpsDir = -1; }
-        document.getElementById('tele-fps').textContent = fps.toFixed(1) + ' FPS';
-      }, 1200);
-
-      // Animate Ping between 25–35ms
-      setInterval(() => {
-        const ping = Math.floor(25 + Math.random() * 10);
-        document.getElementById('tele-ping').textContent = ping + 'ms';
-      }, 1800);
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       PASSIVE SCROLL (performance)
-       ═══════════════════════════════════════════════════════ */
-    window.addEventListener('scroll', () => {}, { passive: true });
-    window.addEventListener('touchmove', () => {}, { passive: true });
-
-    /* ═══════════════════════════════════════════════════════
-       INIT
-       ═══════════════════════════════════════════════════════ */
-    document.addEventListener('DOMContentLoaded', () => {
-      buildDnsGrid();
-      initTelemetry();
-      switchTab(0);
-    });
-  </script>
+  /* ═══════════════════════════════════════════════════════
+     INIT
+     ═══════════════════════════════════════════════════════ */
+  document.addEventListener('DOMContentLoaded', () => {
+    checkExistingLicense();
+    buildDnsGrid();
+    initTelemetry();
+    switchTab(0);
+  });
+</script>
 </body>
 </html>
