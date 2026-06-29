@@ -7,8 +7,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="ZEV QUANTUM" />
   <meta name="theme-color" content="#08020f" />
-  <meta name="description" content="ZEV BOOST QUANTUM v6.0 — Neon Purple Cyber Void. iOS Gaming Overclock Engine." />
-  <title>ZEV BOOST QUANTUM [v6.0]</title>
+  <meta name="description" content="ZEV BOOST QUANTUM v7.0 — Neon Purple Cyber Void. iOS Gaming Overclock Engine & Admin Command." />
+  <title>ZEV BOOST QUANTUM [v7.0]</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -95,7 +95,7 @@
        ANIMATIONS
     ───────────────────────────────────────────────────────── */
     @keyframes corePulse {
-      0%, 100% { box-shadow: 0 0 20px var(--violet-glow), 0 0 50px rgba(183,0,255,0.1); }
+      0%, 100% { box-shadow: 0 0 20px var(--violet-glow), 0 0 50px rgba(183,0,255,0.15); }
       50%       { box-shadow: 0 0 40px var(--violet), 0 0 80px var(--violet-glow); }
     }
 
@@ -147,6 +147,11 @@
     @keyframes progressWave {
       from { background-position: 0 0; }
       to   { background-position: 60px 0; }
+    }
+
+    @keyframes deathPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 77, 0.4), inset 0 0 15px rgba(255,0,77,0.1); }
+      50%       { box-shadow: 0 0 35px rgba(255, 0, 77, 0.8), inset 0 0 25px rgba(255,0,77,0.2); }
     }
 
     /* ─────────────────────────────────────────────────────────
@@ -417,6 +422,14 @@
 
     #lock-status-msg.err { color: #ff4d6a; }
     #lock-status-msg.ok  { color: #7aff9c; }
+
+    .lock-hint {
+      font-size: 8.5px;
+      font-family: var(--font-mono);
+      color: var(--muted-purple);
+      text-align: center;
+      line-height: 1.8;
+    }
 
     /* ─────────────────────────────────────────────────────────
        MAIN APP
@@ -1457,8 +1470,195 @@
     }
 
     /* ─────────────────────────────────────────────────────────
-       FOOTER
+       CENTRAL COMMAND MAINFRAME - ZEV ADMIN
     ───────────────────────────────────────────────────────── */
+    #admin-panel {
+      display: none;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      z-index: 8500;
+      background: radial-gradient(ellipse at 50% 0%, rgba(138,43,226,0.2) 0%, #06010c 80%);
+      flex-direction: column;
+      overflow-y: auto;
+      padding: calc(var(--safe-top) + 12px) 16px calc(var(--safe-bottom) + 16px);
+    }
+
+    @media (min-width: 481px) {
+      #admin-panel {
+        border-left: 1px solid var(--border-soft);
+        border-right: 1px solid var(--border-soft);
+        box-shadow: 0 0 50px rgba(183, 0, 255, 0.15);
+      }
+    }
+
+    #admin-panel.visible { display: flex; }
+
+    .admin-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .admin-title {
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #ff00c8 0%, #b700ff 50%, #00ffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: tinyBlink 5s ease-in-out infinite;
+    }
+
+    .admin-table-container {
+      max-height: 380px;
+      overflow-y: auto;
+      margin-top: 14px;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--r-md);
+      background: rgba(10, 4, 20, 0.85);
+      scrollbar-width: none;
+    }
+
+    .admin-table-container::-webkit-scrollbar { display: none; }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+    }
+
+    .admin-table th, .admin-table td {
+      padding: 11px 8px;
+      text-align: left;
+      border-bottom: 1px solid rgba(138, 43, 226, 0.15);
+    }
+
+    .admin-table th {
+      background: rgba(32, 12, 58, 0.9);
+      color: var(--violet);
+      font-family: var(--font-hud);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .admin-table td { color: var(--white-soft); }
+
+    .status-lbl {
+      font-weight: 700;
+      font-size: 10px;
+    }
+
+    .status-lbl.active { color: #7aff9c; text-shadow: 0 0 8px rgba(122,255,156,0.3); }
+    .status-lbl.blocked { color: #ff4d6a; text-shadow: 0 0 8px rgba(255,77,106,0.3); }
+
+    .pill-btn {
+      padding: 6px 12px;
+      border-radius: var(--r-full);
+      border: 1.5px solid var(--border-soft);
+      background: rgba(183,0,255,0.08);
+      color: var(--violet);
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .pill-btn:active { transform: scale(0.92); }
+
+    .pill-btn.block-act {
+      border-color: rgba(255,77,106,0.4);
+      color: #ff4d6a;
+      background: rgba(255,77,106,0.06);
+    }
+
+    .pill-btn.unblock-act {
+      border-color: rgba(122,255,156,0.4);
+      color: #7aff9c;
+      background: rgba(122,255,156,0.06);
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       DEATH SCREEN OVERLAY
+       ───────────────────────────────────────────────────────── */
+    #death-screen {
+      display: none;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      z-index: 9999;
+      background: #06010d;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    @media (min-width: 481px) {
+      #death-screen {
+        border-left: 1px solid rgba(255, 0, 77, 0.3);
+        border-right: 1px solid rgba(255, 0, 77, 0.3);
+        box-shadow: 0 0 50px rgba(255, 0, 77, 0.15);
+      }
+    }
+
+    #death-screen.visible { display: flex; }
+
+    .death-box {
+      background: rgba(20, 4, 10, 0.85);
+      border: 2px solid #ff004d;
+      border-radius: var(--r-xl);
+      padding: 34px 24px;
+      width: 90%;
+      max-width: 380px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      animation: deathPulse 2s infinite;
+    }
+
+    .death-icon {
+      font-size: 40px;
+      margin-bottom: 18px;
+    }
+
+    .death-title {
+      font-family: var(--font-hud);
+      font-size: 16px;
+      font-weight: 900;
+      color: #ff004d;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      text-shadow: 0 0 10px rgba(255,0,77,0.5);
+    }
+
+    .death-sub {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--silver-purple);
+      line-height: 1.7;
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       FOOTER
+       ───────────────────────────────────────────────────────── */
     .app-footer {
       text-align: center;
       padding: 6px 0 4px;
@@ -1508,7 +1708,7 @@
       </div>
       <div>
         <div class="lock-title">ZEV BOOST QUANTUM</div>
-        <div class="lock-subtitle" style="margin-top:6px;">[ NEON PURPLE CYBER VOID v6.0 ]</div>
+        <div class="lock-subtitle" style="margin-top:6px;">[ NEON PURPLE CYBER VOID v7.0 ]</div>
       </div>
       <div class="lock-panel">
         <div class="lock-field-label">▶ NHẬP LICENSE KEY ĐỂ TRUY CẬP HỆ THỐNG</div>
@@ -1541,7 +1741,7 @@
   </div>
 
   <!-- ════════════════════════════════════════════════════════
-       MAIN APPLICATION
+       MAIN APPLICATION (CLIENT UI)
        ════════════════════════════════════════════════════════ -->
   <div id="main-app">
 
@@ -1552,7 +1752,7 @@
           <div class="brand-orb">Z</div>
           <div class="brand-text">
             <div class="brand-name">ZEV BOOST QUANTUM</div>
-            <div class="brand-ver">NEON PURPLE CYBER VOID v6.0</div>
+            <div class="brand-ver">NEON PURPLE CYBER VOID v7.0</div>
           </div>
         </div>
         <div id="lic-badge">LOCKED</div>
@@ -1659,7 +1859,7 @@
         <div class="app-footer">
           <div class="footer-divider"></div>
           <div class="footer-credit">Web designed by Duc Anh Zev</div>
-          <div class="footer-ver">v6.0.0 · NEON PURPLE CYBER VOID · ducanhzev.pages.dev</div>
+          <div class="footer-ver">v7.0.0 · NEON PURPLE CYBER VOID · ducanhzev.pages.dev</div>
         </div>
 
       </div>
@@ -1700,7 +1900,7 @@
         <div class="glass-panel">
           <div class="panel-title">Hacker Log Terminal</div>
           <div id="hacker-log">
-            <span class="log-ln dim">[SYS] ZEV QUANTUM MAINFRAME v6.0 — INITIALIZED</span><br>
+            <span class="log-ln dim">[SYS] ZEV QUANTUM MAINFRAME v7.0 — INITIALIZED</span><br>
             <span class="log-ln dim">[SYS] AWAITING OVERCLOCK COMMAND...</span>
           </div>
         </div>
@@ -1718,7 +1918,7 @@
         <div class="app-footer">
           <div class="footer-divider"></div>
           <div class="footer-credit">Web designed by Duc Anh Zev</div>
-          <div class="footer-ver">v6.0.0 · ducanhzev.pages.dev</div>
+          <div class="footer-ver">v7.0.0 · ducanhzev.pages.dev</div>
         </div>
 
       </div>
@@ -1857,7 +2057,7 @@
         <div class="app-footer">
           <div class="footer-divider"></div>
           <div class="footer-credit">Web designed by Duc Anh Zev</div>
-          <div class="footer-ver">v6.0.0 · ducanhzev.pages.dev</div>
+          <div class="footer-ver">v7.0.0 · ducanhzev.pages.dev</div>
         </div>
 
       </div>
@@ -2009,13 +2209,63 @@
         <div class="app-footer">
           <div class="footer-divider"></div>
           <div class="footer-credit">Web designed by Duc Anh Zev</div>
-          <div class="footer-ver">v6.0.0 · ducanhzev.pages.dev</div>
+          <div class="footer-ver">v7.0.0 · ducanhzev.pages.dev</div>
         </div>
 
       </div>
 
     </main>
-  </div><!-- end main-app -->
+  </div><!-- end main-app (Client UI) -->
+
+  <!-- ════════════════════════════════════════════════════════
+       ADMIN DASHBOARD PANEL
+       ════════════════════════════════════════════════════════ -->
+  <div id="admin-panel">
+    <div class="admin-header">
+      <div class="admin-title">⚙️ CENTRAL COMMAND MAINFRAME</div>
+      <div class="lock-subtitle" style="margin-top:6px; color: var(--pink-neon);">[ ZEV BOOST SYSTEM ADMINISTRATION ]</div>
+    </div>
+
+    <div class="glass-panel" style="flex:1; display:flex; flex-direction:column; gap:12px;">
+      <div class="panel-title">Mã License Hệ Thống</div>
+      <div class="admin-table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Mã License Key</th>
+              <th>Loại Gói</th>
+              <th>Trạng Thái</th>
+              <th>Hành Động</th>
+            </tr>
+          </thead>
+          <tbody id="admin-key-list-tbody">
+            <!-- Populated via Javascript -->
+          </tbody>
+        </table>
+      </div>
+
+      <button class="acc-btn danger" style="margin-top:auto; width:100%;" onclick="logoutAdmin()">
+        ĐĂNG XUẤT ADMIN [ SYSTEM DISCONNECT ]
+      </button>
+    </div>
+
+    <div class="app-footer" style="margin-top:14px;">
+      <div class="footer-divider"></div>
+      <div class="footer-credit">Web designed by Duc Anh Zev</div>
+      <div class="footer-ver">ADMIN CONSOLE · v7.0.0</div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       DEATH SCREEN OVERLAY (BLOCKED USERS)
+       ════════════════════════════════════════════════════════ -->
+  <div id="death-screen">
+    <div class="death-box">
+      <div class="death-icon">❌</div>
+      <div class="death-title">Key của bạn đã bị khóa.</div>
+      <div class="death-sub">[Vui lòng liên hệ Admin hệ thống để biết thêm chi tiết]</div>
+    </div>
+  </div>
 
   <!-- Toast -->
   <div id="app-toast">
@@ -2040,6 +2290,8 @@ const VALID_KEYS = [
   'ZEV-MONTH-M3P', 'ZEV-MONTH-P7Z', 'ZEV-MONTH-F2K', 'ZEV-MONTH-H9X', 'ZEV-MONTH-V4Y',
   'ZEV-MONTH-K1B', 'ZEV-MONTH-N8W', 'ZEV-MONTH-Q5T', 'ZEV-MONTH-L3R', 'ZEV-MONTH-S6G'
 ];
+
+const ADMIN_KEY = "ZEV-ADMIN-S2H-H1J";
 
 /* ════════════════════════════════════════════════════════
    MATRIX CANVAS — PURPLE RAIN
@@ -2091,23 +2343,33 @@ const VALID_KEYS = [
 })();
 
 /* ════════════════════════════════════════════════════════
-   LICENSE KEY ENGINE (ALPHANUMERIC SUFFIX)
+   AUTHENTICATION ENGINE (DUAL ROUTE)
    ════════════════════════════════════════════════════════ */
 const KEY_REGEX = /^ZEV-(DAY|WEEK|MONTH)-[A-Za-z0-9]{3}$/;
 const DURATIONS = { DAY: 86400000, WEEK: 604800000, MONTH: 2592000000 };
 const PKG_NAMES = { DAY: 'GÓI NGÀY (1 NGÀY)', WEEK: 'GÓI TUẦN (7 NGÀY)', MONTH: 'GÓI THÁNG (30 NGÀY)' };
 let countdownTimer = null;
+let watchdogInterval = null;
 
 // Lock-screen terminal loader lines
-const INJECT_STEPS = [
+const CLIENT_STEPS = [
   { p: 0,   t: '🚀 CONNECTING TO BYPASS EXPLOIT MATRIX...' },
   { p: 15,  t: '🛰️ ESTABLISHING VPN TUNNEL TO iOS SANDBOX...' },
   { p: 30,  t: '🔑 VERIFYING ALPHANUMERIC CRYPTO SEED...' },
   { p: 45,  t: '🧩 DECRYPTING SHA-256 SYSTEM SIGNATURES...' },
-  { p: 60,  t: '⚙️ INJECTING SPEED HOOKS INTO SAFARI RENDER ENGINE...' },
+  { p: 60,  t: '⚙️ INJECTING SPEED HOOKS INTO RENDER ENGINE...' },
   { p: 80,  t: '⚡ OVERRIDING THERMAL THROTTLING GOVERNOR...' },
   { p: 95,  t: '🛸 SYNCING PROMOTION 120HZ RENDER LOOP...' },
   { p: 100, t: '✅ SUCCESS: SYSTEM ACCESS GRANTED!' }
+];
+
+const ADMIN_STEPS = [
+  { p: 0,   t: '⚙️ ESTABLISHING ADMIN SECURITY HANDSHAKE...' },
+  { p: 20,  t: '🔌 INITIALIZING SECURE SHELL SESSION...' },
+  { p: 40,  t: '🛡️ GRANTING CENTRAL MAINFRAME ROOT PRIVILEGES...' },
+  { p: 60,  t: '🔗 ACCESSING LICENSE DATABASE REGISTRY...' },
+  { p: 80,  t: '📟 SYNCING COMMAND SCHEDULER MATRIX...' },
+  { p: 100, t: '👑 WELCOME CHIEF COMMANDER. CONSOLE ONLINE.' }
 ];
 
 function addInjectLog(text) {
@@ -2120,6 +2382,14 @@ function addInjectLog(text) {
   term.scrollTop = term.scrollHeight;
 }
 
+function getBlacklist() {
+  return JSON.parse(localStorage.getItem('zev_blacklisted_keys') || '[]');
+}
+
+function setBlacklist(arr) {
+  localStorage.setItem('zev_blacklisted_keys', JSON.stringify(arr));
+}
+
 function startKeyValidationSequence() {
   const keyVal   = document.getElementById('key-input').value.trim();
   const statusEl = document.getElementById('lock-status-msg');
@@ -2130,7 +2400,19 @@ function startKeyValidationSequence() {
     return;
   }
 
-  // Regex validation check
+  // Route A: Admin Key Check
+  if (keyVal === ADMIN_KEY) {
+    runSecurityInjection(ADMIN_STEPS, () => {
+      statusEl.className = 'ok';
+      statusEl.textContent = '[ ADMIN SESSION GRANTED ]';
+      setTimeout(() => {
+        runUnlockAnimation(() => unlockAdminDashboard());
+      }, 600);
+    });
+    return;
+  }
+
+  // Route B: Client Key Check
   if (!KEY_REGEX.test(keyVal)) {
     statusEl.textContent = '[ ACCESS DENIED: KEY STRUCTURE INVALID ]';
     statusEl.className = 'err';
@@ -2138,7 +2420,6 @@ function startKeyValidationSequence() {
     return;
   }
 
-  // Check if key is within valid keys list
   if (!VALID_KEYS.includes(keyVal)) {
     statusEl.textContent = '[ ACCESS DENIED: LICENSE KEY NOT EXISTENT ]';
     statusEl.className = 'err';
@@ -2146,46 +2427,58 @@ function startKeyValidationSequence() {
     return;
   }
 
+  // Blacklist Interceptor
+  const blacklist = getBlacklist();
+  if (blacklist.includes(keyVal)) {
+    statusEl.textContent = '[ ACCESS DENIED: LICENSE KEY BLOCKED BY CENTRAL CMD ]';
+    statusEl.className = 'err';
+    if (navigator.vibrate) navigator.vibrate([150, 50, 150]);
+    return;
+  }
+
   const tier     = keyVal.split('-')[1]; // DAY / WEEK / MONTH
   const nowMs    = Date.now();
   const expiryAbs = nowMs + DURATIONS[tier];
 
-  // Lock input and button, show terminal
+  runSecurityInjection(CLIENT_STEPS, () => {
+    localStorage.setItem('zev_key', keyVal);
+    localStorage.setItem('zev_exact_expiry', expiryAbs.toString());
+    localStorage.setItem('zev_tier', tier);
+
+    statusEl.className = 'ok';
+    statusEl.textContent = '[ CLIENT EXPLOIT INJECTED SUCCESSFULLY ]';
+
+    setTimeout(() => {
+      runUnlockAnimation(() => unlockClientUI(keyVal, tier, expiryAbs));
+    }, 600);
+  });
+}
+
+function runSecurityInjection(steps, onDone) {
   document.getElementById('key-input').disabled = true;
   document.getElementById('inject-btn').disabled = true;
   document.getElementById('inject-progress-area').style.display = 'flex';
-  statusEl.textContent = '[ INJECTING... ]';
-  statusEl.className = '';
+  document.getElementById('lock-status-msg').textContent = '[ INJECTING SECURE PAYLOAD... ]';
+  document.getElementById('lock-status-msg').className = '';
 
   let stepIdx = 0;
   const progressBar = document.getElementById('inject-bar-fill');
   
   function executeLoaderStep() {
-    if (stepIdx < INJECT_STEPS.length) {
-      const step = INJECT_STEPS[stepIdx];
+    if (stepIdx < steps.length) {
+      const step = steps[stepIdx];
       progressBar.style.width = `${step.p}%`;
       addInjectLog(step.t);
       if (navigator.vibrate) navigator.vibrate([15]);
       stepIdx++;
       
-      // Dynamic timer duration to create a smooth, variable loading experience (5-7 seconds total)
-      const nextDelay = 600 + Math.random() * 300; 
+      // Dynamic timer variable to create a smooth, variable loading experience (5 seconds total)
+      const nextDelay = 550 + Math.random() * 150; 
       setTimeout(executeLoaderStep, nextDelay);
     } else {
-      // Completed, save to localStorage and unlock
-      localStorage.setItem('zev_key', keyVal);
-      localStorage.setItem('zev_exact_expiry', expiryAbs.toString());
-      localStorage.setItem('zev_tier', tier);
-      
-      statusEl.className = 'ok';
-      statusEl.textContent = '[ EXPLOIT INJECTED SUCCESSFULLY ]';
-      
-      setTimeout(() => {
-        runUnlockAnimation(() => unlockApp(keyVal, tier, expiryAbs));
-      }, 800);
+      onDone();
     }
   }
-
   executeLoaderStep();
 }
 
@@ -2201,7 +2494,10 @@ function runUnlockAnimation(callback) {
   }, 650);
 }
 
-function unlockApp(key, tier, expiryAbs) {
+/* ════════════════════════════════════════════════════════
+   CLIENT UI INITIALIZATION
+   ════════════════════════════════════════════════════════ */
+function unlockClientUI(key, tier, expiryAbs) {
   const mainEl = document.getElementById('main-app');
   mainEl.classList.add('visible');
 
@@ -2218,20 +2514,182 @@ function unlockApp(key, tier, expiryAbs) {
 
   startCountdown(expiryAbs);
   startTelemetry();
-  showToast('⚡ SYSTEM INTERFACE INJECTED');
+  startRuntimeInterceptor();
+  showToast('⚡ CLIENT MAIN SYSTEM UNLOCKED');
+}
+
+/* ════════════════════════════════════════════════════════
+   ADMIN CONSOLE LOGIC
+   ════════════════════════════════════════════════════════ */
+function unlockAdminDashboard() {
+  const adminEl = document.getElementById('admin-panel');
+  adminEl.classList.add('visible');
+  buildAdminKeyList();
+  showToast('⚙️ ROOT CONTROL CONSOLE ONLINE');
+}
+
+function buildAdminKeyList() {
+  const tbody = document.getElementById('admin-key-list-tbody');
+  const blacklist = getBlacklist();
+
+  tbody.innerHTML = VALID_KEYS.map(key => {
+    const tier = key.split('-')[1];
+    const isBlocked = blacklist.includes(key);
+
+    return `
+      <tr>
+        <td>${key}</td>
+        <td>${tier}</td>
+        <td>
+          <span class="status-lbl ${isBlocked ? 'blocked' : 'active'}">
+            ${isBlocked ? 'ĐÃ KHÓA' : 'Hoạt động'}
+          </span>
+        </td>
+        <td>
+          <button class="pill-btn ${isBlocked ? 'unblock-act' : 'block-act'}" onclick="toggleKeyBlock('${key}', ${isBlocked})">
+            ${isBlocked ? 'MỞ KHÓA' : 'KHÓA KEY'}
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function toggleKeyBlock(key, isCurrentlyBlocked) {
+  let blacklist = getBlacklist();
+  if (isCurrentlyBlocked) {
+    // Remove from blacklist
+    blacklist = blacklist.filter(k => k !== key);
+    showToast(`🔓 Đã mở khóa: ${key}`);
+  } else {
+    // Add to blacklist
+    if (!blacklist.includes(key)) {
+      blacklist.push(key);
+    }
+    showToast(`❌ Đã khóa key: ${key}`);
+  }
+  setBlacklist(blacklist);
+  buildAdminKeyList();
+
+  if (navigator.vibrate) navigator.vibrate([20]);
+}
+
+function logoutAdmin() {
+  if (navigator.vibrate) navigator.vibrate([30]);
+  const adminEl = document.getElementById('admin-panel');
+  const lockEl = document.getElementById('cyber-lock-screen');
+  
+  adminEl.classList.remove('visible');
+  adminEl.style.display = 'none';
+
+  // Restore Lock Screen
+  lockEl.style.display = 'flex';
+  lockEl.style.opacity = '1';
+  lockEl.style.transition = '';
+
+  document.getElementById('key-input').disabled = false;
+  document.getElementById('key-input').value = '';
+  document.getElementById('inject-btn').disabled = false;
+  document.getElementById('inject-progress-area').style.display = 'none';
+  document.getElementById('inject-log-terminal').innerHTML = '';
+  document.getElementById('lock-status-msg').textContent = '[ SYSTEM LOGOUT — ROOT CONSOLE STANDBY ]';
+  document.getElementById('lock-status-msg').className = '';
+
+  // Restart matrix Canvas rain
+  (function() {
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx    = canvas.getContext('2d');
+    const CHARS  = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const COL_W  = 14;
+    let drops    = [];
+    let raf3     = null;
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    const cols    = Math.floor(canvas.width / COL_W);
+    drops = Array.from({ length: cols }, () => -(Math.random() * 30));
+    function draw3() {
+      ctx.fillStyle = 'rgba(8,2,15,0.07)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.font = '12px Space Mono,monospace';
+      for (let i=0;i<drops.length;i++){
+        const y=drops[i]*COL_W;
+        ctx.fillStyle = y<canvas.height*0.3?'#b700ff':'rgba(138,43,226,0.6)';
+        ctx.fillText(CHARS[Math.floor(Math.random()*CHARS.length)],i*COL_W,y);
+        if(y>canvas.height&&Math.random()>0.97)drops[i]=0;
+        drops[i]+=0.55;
+      }
+      raf3=requestAnimationFrame(draw3);
+    }
+    draw3();
+    window._stopMatrix=function(){if(raf3){cancelAnimationFrame(raf3);raf3=null;}};
+  })();
+}
+
+/* ════════════════════════════════════════════════════════
+   INTERCEPTOR - BLACKLIST MONITORING & DESTRUCTION
+   ════════════════════════════════════════════════════════ */
+function startRuntimeInterceptor() {
+  if (watchdogInterval) clearInterval(watchdogInterval);
+  watchdogInterval = setInterval(() => {
+    const activeKey = localStorage.getItem('zev_key');
+    const blacklist = getBlacklist();
+
+    if (activeKey && blacklist.includes(activeKey)) {
+      clearInterval(watchdogInterval);
+      watchdogInterval = null;
+      triggerDeathBlockSequence();
+    }
+  }, 2000);
+}
+
+function triggerDeathBlockSequence() {
+  // Clear local storage session properties (keep blacklist, only wipe session)
+  localStorage.removeItem('zev_key');
+  localStorage.removeItem('zev_exact_expiry');
+  localStorage.removeItem('zev_tier');
+
+  // Terminate countdowns & loops
+  if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
+  if (watchdogInterval) { clearInterval(watchdogInterval); watchdogInterval = null; }
+  if (rafLoop) { cancelAnimationFrame(rafLoop); rafLoop = null; }
+
+  // Turn off overclock animations & indicators
+  ocActive = false;
+  ['cr1','cr2','cr3'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('active');
+  });
+  const btn = document.getElementById('core-btn');
+  if (btn) btn.classList.remove('active');
+
+  // Hide primary elements and show the death screen overlay
+  document.getElementById('main-app').style.display = 'none';
+  document.getElementById('cyber-lock-screen').style.display = 'none';
+  document.getElementById('admin-panel').style.display = 'none';
+  
+  const deathOverlay = document.getElementById('death-screen');
+  deathOverlay.classList.add('visible');
+  if (navigator.vibrate) navigator.vibrate([300, 150, 300, 150, 400]);
 }
 
 function checkStoredKey() {
-  const key    = localStorage.getItem('zev_key');
-  const expiry = parseInt(localStorage.getItem('zev_exact_expiry') || '0', 10);
-  const tier   = localStorage.getItem('zev_tier') || '';
-  const now    = Date.now();
+  const key       = localStorage.getItem('zev_key');
+  const expiryAbs = parseInt(localStorage.getItem('zev_exact_expiry') || '0', 10);
+  const tier      = localStorage.getItem('zev_tier') || '';
+  const now       = Date.now();
+  const blacklist = getBlacklist();
 
-  // If expiry exists and is in the future, bypass lockscreen
-  if (key && tier && expiry > now) {
+  // Primary check: if the stored key has been blacklisted, block load instantly!
+  if (key && blacklist.includes(key)) {
+    triggerDeathBlockSequence();
+    return;
+  }
+
+  // Active key state is valid
+  if (key && tier && expiryAbs > now) {
     document.getElementById('cyber-lock-screen').style.display = 'none';
     window._stopMatrix && window._stopMatrix();
-    unlockApp(key, tier, expiry);
+    unlockClientUI(key, tier, expiryAbs);
   }
 }
 
@@ -2564,11 +3022,11 @@ function downloadProfile() {
       <key>PayloadDisplayName</key>
       <string>ZEV Boost Network Profile</string>
       <key>PayloadIdentifier</key>
-      <string>com.zevboost.dns.v6</string>
+      <string>com.zevboost.dns.v7</string>
       <key>PayloadType</key>
       <string>com.apple.dnsSettings.managed</string>
       <key>PayloadUUID</key>
-      <string>Z6E1V2B3-O4O5-6S7T-8U9V-0AZBDCEDFE2F</string>
+      <string>Z7E1V2B3-O4O5-6S7T-8U9V-0AZBDCEDFE3F</string>
       <key>PayloadVersion</key>
       <integer>1</integer>
       <key>DNSSettings</key>
@@ -2594,11 +3052,11 @@ function downloadProfile() {
   <key>PayloadDisplayName</key>
   <string>ZEV Boost QUANTUM Network</string>
   <key>PayloadIdentifier</key>
-  <string>com.zevboost.profile.v6</string>
+  <string>com.zevboost.profile.v7</string>
   <key>PayloadType</key>
   <string>Configuration</string>
   <key>PayloadUUID</key>
-  <string>Z6E2V3B4-O5O6-7S8T-9UAB-1CZDEV3F4G6H</string>
+  <string>Z7E2V3B4-O5O6-7S8T-9UAB-1CZDEV3F4G7H</string>
   <key>PayloadVersion</key>
   <integer>1</integer>
 </dict>
@@ -2656,7 +3114,7 @@ function getFFLabel(idx) {
 /* ════════════════════════════════════════════════════════
    OB54 SENSITIVITY TUNER
    ════════════════════════════════════════════════════════ */
-const DEVICE_DB = {
+const SENS_DEVICES = {
   promax: { 1:165, 2:170, 3:180, 4:148, 5:0, 6:93, 7:52 },
   pro:    { 1:168, 2:172, 3:178, 4:150, 5:0, 6:95, 7:50 },
   plus:   { 1:170, 2:175, 3:182, 4:152, 5:0, 6:90, 7:48 },
@@ -2666,11 +3124,11 @@ const DEVICE_DB = {
 
 function getDeviceCfg(name) {
   const n = name.toLowerCase().replace(/\s+/g,'');
-  if (n.includes('promax') || n.includes('pro max') || n.includes('plus max')) return DEVICE_DB.promax;
-  if (n.includes('pro'))    return DEVICE_DB.pro;
-  if (n.includes('plus'))   return DEVICE_DB.plus;
-  if (n.includes('mini'))   return DEVICE_DB.mini;
-  return DEVICE_DB.base;
+  if (n.includes('promax') || n.includes('pro max') || n.includes('plus max')) return SENS_DEVICES.promax;
+  if (n.includes('pro'))    return SENS_DEVICES.pro;
+  if (n.includes('plus'))   return SENS_DEVICES.plus;
+  if (n.includes('mini'))   return SENS_DEVICES.mini;
+  return SENS_DEVICES.base;
 }
 
 function isValidDevice(name) {
